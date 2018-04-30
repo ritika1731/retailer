@@ -16,30 +16,28 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 	@Override
 	public Supplier addSupplier(Supplier supplier) {
-//		entityManager.persist(supplier);
-//		entityManager.flush();
-//		
+		String query = "insert into supplier (supplierId,supplierName,supplierAddress,quantityOrder,orderId,amount) values (?,?,?,?,?,?)";
+        jdbcTemplate = new JdbcTemplate(dataSource);
+        Object[] inputs = new Object[] {supplier.getSupplierId(), supplier.getSupplierName(), supplier.getSupplierAddress(),supplier.getQuantityOrder(),supplier.getOrderId(),supplier.getAmount()};
+        jdbcTemplate.update(query, inputs);
+        
 		return supplier;
 	}
 
 	@Override
 	public Supplier updateSupplier(Supplier supplier) {
-//		entityManager.merge(supplier);
-//		entityManager.flush();
+		String sql = "update supplier set amount=? where supplierId = ?";
+		jdbcTemplate = new JdbcTemplate(dataSource);
+        Object[] inputs = new Object[] {supplier.getAmount(),supplier.getSupplierId()};
+       jdbcTemplate.update(sql, inputs);
 		return supplier;
 	}
 
 	@Override
-	public boolean deleteSupplier(int supplierId) {
-//		Supplier supplier=entityManager.find(Supplier.class, supplierId);
-//		if(supplier!=null)
-//			
-//		{
-//			entityManager.remove(supplier);
-//			entityManager.flush();
-//			return true;
-//		}
-		return false;
+	public Supplier deleteSupplier(int supplierId) {
+		String sql = "delete from supplier where supplierId = ?";
+        jdbcTemplate.update(sql,new Object[]{supplierId});
+		return null;
 	}
 	
 

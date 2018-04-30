@@ -22,9 +22,9 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
-	public Customer deleteCustomer(Customer customer) {
+	public Customer deleteCustomer(int customerId) {
 		// TODO Auto-generated method stub
-		return dao.deleteCustomer(customer);
+		return dao.deleteCustomer(customerId);
 	}
 
 }

@@ -17,7 +17,7 @@ public class StoreApplicationTests {
 	Customer customer=new Customer(1,"ritika","delhi","cash");
 	Supplier supplier=new Supplier(101,"asd","mumbai",2,111,200.2);
 	Goods goods=new Goods(121,"asd",2,200.2);
-	Retailer retailer=new Retailer("qwerty","pune");
+	Retailer retailer=new Retailer(201,"qwerty","pune");
 
 	
 	@Test

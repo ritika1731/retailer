@@ -27,19 +27,18 @@ public class CustomerDaoImpl implements CustomerDao{
 
 	@Override
 	public Customer updateCustomer(Customer customer) {
-		/*entityManager.merge(customer);
-		entityManager.flush();
-		return customer;*/return customer;
+		String sql = "update customer set paymentMode=? where customerId = ?";
+		jdbcTemplate = new JdbcTemplate(dataSource);
+         Object[] inputs = new Object[] {customer.getPaymentMode(),customer.getCustomerId()};
+        jdbcTemplate.update(sql, inputs);
+		return customer;
 	}
 
 	@Override
-	public Customer deleteCustomer(Customer customer) {
-		
-		 String query = "delete from customer (customerId,customerName,customerAddress,paymentMode) where customerId=?";
-	        jdbcTemplate = new JdbcTemplate(dataSource);
-	        Object[] inputs = new Object[] {customer.getCustomerId()};
-	        jdbcTemplate.update(query, inputs);
-	        return customer;
+	public Customer deleteCustomer(int customerId) {
+		 String sql = "delete from customer where customerId = ?";
+	        jdbcTemplate.update(sql,new Object[]{customerId});
+			return null;
 		
 		
 	}

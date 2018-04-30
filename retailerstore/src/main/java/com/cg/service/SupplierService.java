@@ -8,5 +8,5 @@ public Supplier addSupplier(Supplier supplier);
 	
 	public Supplier updateSupplier(Supplier supplier);
 
-	public boolean deleteSupplier(int supplierId);
+	public Supplier deleteSupplier(int supplierId);
 }

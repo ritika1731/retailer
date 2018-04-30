@@ -7,7 +7,8 @@ public interface CustomerService {
 	public Customer addCustomer(Customer customer);
 	
 	public Customer updateCustomer(Customer customer);
+	//public Customer updateCustomer(int customerId);
 
-//	public boolean deleteCustomer(int customerId);
-	public Customer deleteCustomer(Customer customer);
+	public Customer deleteCustomer(int customerId);
+	//public Customer deleteCustomer(Customer customer);
 }

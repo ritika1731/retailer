@@ -1,15 +1,15 @@
 package com.cg.dao;
 
-import com.cg.entity.Customer;
-import com.cg.entity.Goods;
-import com.cg.entity.Supplier;
+import com.cg.entity.Retailer;
 
 public interface RetailerDao {
 
-	public Goods retrieveGoods(int goodsId);
+	public Retailer addRetailer(Retailer retailer);
+	
+	public String retrieveGoods(int goodsId);
 
-	public Customer retrieveCustomer(int customerId);
+	public String retrieveCustomer(int customerId);
 
-	public Supplier retrieveSupplier(int SupplierId);
+	public String retrieveSupplier(int supplierId);
 
 }

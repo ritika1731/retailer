@@ -5,9 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cg.dao.RetailerDao;
-import com.cg.entity.Customer;
-import com.cg.entity.Goods;
-import com.cg.entity.Supplier;
 
 
 @Service
@@ -18,19 +15,19 @@ public class RetailerServiceImpl implements RetailerService{
 	RetailerDao dao;
 	
 	@Override
-	public Goods retrieveGoods(int goodsId) {
+	public String retrieveGoods(int goodsId) {
 		// TODO Auto-generated method stub
 		return dao.retrieveGoods(goodsId);
 	}
 
 	@Override
-	public Customer retrieveCustomer(int customerId) {
+	public String retrieveCustomer(int customerId) {
 		// TODO Auto-generated method stub
 		return dao.retrieveCustomer(customerId);
 	}
 
 	@Override
-	public Supplier retrieveSupplier(int SupplierId) {
+	public String retrieveSupplier(int SupplierId) {
 		// TODO Auto-generated method stub
 		return dao.retrieveSupplier(SupplierId);
 	}

@@ -7,7 +7,8 @@ public interface CustomerDao {
 	public Customer addCustomer(Customer customer);
 	
 	public Customer updateCustomer(Customer customer);
+	//public Customer updateCustomer(int customerId);
 
-//	public Customer deleteCustomer(int customerId);
-	public Customer deleteCustomer(Customer customer);
+	public Customer deleteCustomer(int customerId);
+//	public Customer deleteCustomer(Customer customer);
 }

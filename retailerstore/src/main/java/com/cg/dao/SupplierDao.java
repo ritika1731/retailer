@@ -8,5 +8,5 @@ public interface SupplierDao {
 	
 	public Supplier updateSupplier(Supplier supplier);
 
-	public boolean deleteSupplier(int supplierId);
+	public Supplier deleteSupplier(int supplierId);
 }

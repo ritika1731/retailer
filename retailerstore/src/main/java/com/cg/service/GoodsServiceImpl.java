@@ -28,7 +28,7 @@ public class GoodsServiceImpl implements GoodsService{
 	}
 
 	@Override
-	public boolean deleteGoods(int goodsId) {
+	public Goods deleteGoods(int goodsId) {
 		// TODO Auto-generated method stub
 		return dao.deleteGoods(goodsId);
 	}

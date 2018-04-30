@@ -3,11 +3,9 @@ package com.cg.dao;
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-
 import com.cg.entity.Goods;
 
-@Repository
+
 public class GoodsDaoImpl implements GoodsDao{
 
 	private DataSource dataSource;
@@ -28,22 +26,18 @@ public class GoodsDaoImpl implements GoodsDao{
 
 	@Override
 	public Goods updateGoods(Goods goods) {
-		/*entityManager.merge(goods);
-		entityManager.flush();
-		return goods;*/return goods;
+		String sql = "update goods set goodsName=? where goodsId = ?";
+		jdbcTemplate = new JdbcTemplate(dataSource);
+         Object[] inputs = new Object[] {goods.getGoodsName(),goods.getGoodsId()};
+        jdbcTemplate.update(sql, inputs);
+		return goods;
 	}
 
 	@Override
-	public boolean deleteGoods(int goodsId) {
-		/*Goods goods=entityManager.find(Goods.class, goodsId);
-		if(goods!=null)
-			
-		{
-			entityManager.remove(goods);
-			entityManager.flush();
-			return true;
-		}
-		return false;*/return false;
+	public Goods deleteGoods(int goodsId) {
+		 String sql = "delete from goods where goodsId = ?";
+	        jdbcTemplate.update(sql,new Object[]{goodsId});
+			return null;
 	
 	}
 

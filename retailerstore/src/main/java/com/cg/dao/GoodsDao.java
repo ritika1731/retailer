@@ -8,7 +8,7 @@ public interface GoodsDao {
 	
 	public Goods updateGoods(Goods goods);
 
-	public boolean deleteGoods(int goodsId);
+	public Goods deleteGoods(int goodsId);
 	
 	public Goods orderGoods(Goods goods);
 

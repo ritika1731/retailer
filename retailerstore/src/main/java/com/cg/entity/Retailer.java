@@ -4,7 +4,13 @@ import javax.persistence.Entity;
 
 @Entity
 public class Retailer {
-
+	private int retailerId;
+	public int getRetailerId() {
+		return retailerId;
+	}
+	public void setRetailerId(int retailerId) {
+		this.retailerId = retailerId;
+	}
 	private String retailerName;
 	private String retailerAddress;
 	public String getRetailerName() {
@@ -23,20 +29,23 @@ public class Retailer {
 	 * @param retailerName
 	 * @param retailerAddress
 	 */
-	public Retailer(String retailerName, String retailerAddress) {
-		super();
-		this.retailerName = retailerName;
-		this.retailerAddress = retailerAddress;
-	}
+	
 	/**
 	 * 
 	 */
 	public Retailer() {
 		super();
 	}
+	public Retailer(int retailerId, String retailerName, String retailerAddress) {
+		super();
+		this.retailerId = retailerId;
+		this.retailerName = retailerName;
+		this.retailerAddress = retailerAddress;
+	}
 	@Override
 	public String toString() {
-		return "Retailer [retailerName=" + retailerName + ", retailerAddress=" + retailerAddress + "]";
+		return "Retailer [retailerId=" + retailerId + ", retailerName=" + retailerName + ", retailerAddress="
+				+ retailerAddress + "]";
 	}
 
 

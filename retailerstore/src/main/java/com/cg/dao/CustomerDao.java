@@ -8,6 +8,6 @@ public interface CustomerDao {
 	
 	public Customer updateCustomer(Customer customer);
 
-	public boolean deleteCustomer(int customerId);
-
+//	public Customer deleteCustomer(int customerId);
+	public Customer deleteCustomer(Customer customer);
 }

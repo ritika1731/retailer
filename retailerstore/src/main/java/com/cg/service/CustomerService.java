@@ -8,5 +8,6 @@ public interface CustomerService {
 	
 	public Customer updateCustomer(Customer customer);
 
-	public boolean deleteCustomer(int customerId);
+//	public boolean deleteCustomer(int customerId);
+	public Customer deleteCustomer(Customer customer);
 }

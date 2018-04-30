@@ -15,8 +15,8 @@ public class Goods {
 
 	private int goodsId;
 	private String goodsName;
-	private String goodsQuantity;
-	private String goodsPrice;
+	private int goodsQuantity;
+	private double goodsPrice;
 	public int getGoodsId() {
 		return goodsId;
 	}
@@ -29,16 +29,16 @@ public class Goods {
 	public void setGoodsName(String goodsName) {
 		this.goodsName = goodsName;
 	}
-	public String getGoodsQuantity() {
+	public int getGoodsQuantity() {
 		return goodsQuantity;
 	}
-	public void setGoodsQuantity(String goodsQuantity) {
+	public void setGoodsQuantity(int goodsQuantity) {
 		this.goodsQuantity = goodsQuantity;
 	}
-	public String getGoodsPrice() {
+	public double getGoodsPrice() {
 		return goodsPrice;
 	}
-	public void setGoodsPrice(String goodsPrice) {
+	public void setGoodsPrice(double goodsPrice) {
 		this.goodsPrice = goodsPrice;
 	}
 	/**
@@ -47,7 +47,7 @@ public class Goods {
 	 * @param goodsQuantity
 	 * @param goodsPrice
 	 */
-	public Goods(int goodsId, String goodsName, String goodsQuantity, String goodsPrice) {
+	public Goods(int goodsId, String goodsName, int goodsQuantity, double goodsPrice) {
 		super();
 		this.goodsId = goodsId;
 		this.goodsName = goodsName;

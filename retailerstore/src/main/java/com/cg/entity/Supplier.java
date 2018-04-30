@@ -12,7 +12,7 @@ public class Supplier extends Goods {
 	private String supplierAddress;
 	private int quantityOrder;
 	private int orderId;
-	private float amount;
+	private double amount;
 	public int getSupplierId() {
 		return supplierId;
 	}
@@ -43,10 +43,10 @@ public class Supplier extends Goods {
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
-	public float getAmount() {
+	public double getAmount() {
 		return amount;
 	}
-	public void setAmount(float amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	/**
@@ -58,7 +58,7 @@ public class Supplier extends Goods {
 	 * @param amount
 	 */
 	public Supplier(int supplierId, String supplierName, String supplierAddress, int quantityOrder, int orderId,
-			float amount) {
+			double amount) {
 		super();
 		this.supplierId = supplierId;
 		this.supplierName = supplierName;

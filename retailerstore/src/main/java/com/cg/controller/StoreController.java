@@ -1,50 +1,48 @@
   package com.cg.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 
-import com.cg.StoreApplicationTests;
+import com.cg.dao.CustomerDao;
+import com.cg.dao.GoodsDao;
 import com.cg.entity.Customer;
-import com.cg.service.CustomerService;
-import com.cg.service.GoodsService;
-import com.cg.service.RetailerService;
-import com.cg.service.SupplierService;
+import com.cg.entity.Goods;
 
 @Controller
 public class StoreController {
 
-	@Autowired
-	static
-	CustomerService custService;
-
-	@Autowired
-	static
-	GoodsService goodService;
-
-	@Autowired
-	static
-	RetailerService retailerService;
-
-	@Autowired
-	static
-	SupplierService supplierService;
 	
-	@Autowired
-	static
-	StoreApplicationTests  test;
 
 	public static void main(String[] args) {
 
-	//entitymanager.getTransaction( ).begin( );
+		 
+        String confFile = "applicationContext.xml";
+        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext(confFile);
+        CustomerDao custDao = (CustomerDao) context.getBean("customerDao");
+        GoodsDao goodsDao = (GoodsDao) context.getBean("goodsDao");
 
-	      Customer customer= new Customer( ); 
-	      customer.setCustomerId(101);
-	      customer.setCustomerName("ritika");
-	      customer.setCustomerAddress("delhi" );
-	      customer.setPaymentMode("cash");      
-	      customer=custService.addCustomer(customer);
-
-	     
+       Customer cust = new Customer();
+        cust.setCustomerId(1);
+        cust.setCustomerName("ritika");
+        cust.setCustomerAddress("mumbai");
+        cust.setPaymentMode("cash");
+        cust.setCustomerId(2);
+        cust.setCustomerName("aishwarya");
+        cust.setCustomerAddress("ny");
+        cust.setPaymentMode("card");
+        custDao.addCustomer(cust);
+	    
+//        cust.setCustomerId(2);
+//        custDao.deleteCustomer(cust);
+        
+        
+        Goods goods = new Goods();
+        goods.setGoodsId(101);
+        goods.setGoodsName("TV");
+        goods.setGoodsPrice(1000);
+        goods.setGoodsQuantity(1);
+        goodsDao.addGoods(goods);
 
 	}
 

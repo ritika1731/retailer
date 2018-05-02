@@ -1,20 +1,18 @@
 package com.cg.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.cg.dao.SupplierDao;
 import com.cg.entity.Supplier;
 
 
-@Service
-@Transactional
 public class SupplierServiceImpl implements SupplierService {
 
-	@Autowired
+	
 	SupplierDao dao;
 	
+	public SupplierServiceImpl(SupplierDao supplierDao) {
+		dao=supplierDao;	
+	}
+
 	@Override
 	public Supplier addSupplier(Supplier supplier) {
 		// TODO Auto-generated method stub

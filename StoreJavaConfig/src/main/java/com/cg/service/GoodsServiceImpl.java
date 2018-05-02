@@ -1,20 +1,18 @@
 package com.cg.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.cg.dao.GoodsDao;
 import com.cg.entity.Goods;
 
-@Service
-@Transactional
+
 public class GoodsServiceImpl implements GoodsService{
 
-	@Autowired
 	GoodsDao dao;
 	
 	
+	public GoodsServiceImpl(GoodsDao goodsDao) {
+	dao=goodsDao;
+	}
+
 	@Override
 	public Goods addGoods(Goods goods) {
 		// TODO Auto-generated method stub

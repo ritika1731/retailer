@@ -9,6 +9,10 @@ public class CustomerServiceImpl implements CustomerService{
 	CustomerDao dao;
 	
 	
+	public CustomerServiceImpl(CustomerDao customerDao) {
+	dao=customerDao;
+	}
+
 	@Override
 	public Customer addCustomer(Customer customer) {
 		// TODO Auto-generated method stub

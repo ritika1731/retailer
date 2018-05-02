@@ -8,6 +8,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.cg.controller.ApplicationConfiguration;
 import com.cg.entity.Customer;
 import com.cg.entity.Goods;
+import com.cg.entity.Retailer;
 import com.cg.entity.Supplier;
 import com.cg.service.CustomerService;
 import com.cg.service.GoodsService;
@@ -33,49 +34,90 @@ public class RetailerStoreApplicationTests {
 	@Test
 	public void customerTest() {
 
-		Customer customer = new Customer(1, "ritika", "mumbai", "cash");
+		Customer customer = new Customer(13, "rahul", "mumbai", "card");
 		//	CustomerDao customerService;
 		Customer value=custService.addCustomer(customer);
-		assertEquals(1, value);
+		assertEquals(customer, value);
 	}
 	@Test
 	public void goodsTest() {
 
-		Goods goods = new Goods(101, "ritika", 2,1212);
+		Goods goods = new Goods(125, "ritika", 2,1322);
 		//	CustomerDao customerService;
 		Goods value=goodsService.addGoods(goods);
-		assertEquals(1, value);
+		assertEquals(goods, value);
 	}
 	@Test
 	public void supplierTest() {
 
-		Supplier sup = new Supplier(121, "shruti", "pune", 2,1,200);
+		Supplier sup = new Supplier(152, "shruti", "pune", 2,1,500);
 		//	CustomerDao customerService;
 		Supplier value=supplierService.addSupplier(sup);
-		assertEquals(1, value);
+		assertEquals(sup, value);
+	}
+	@Test
+	public void retailerTest() {
+
+		Retailer retail = new Retailer(144, "Priya", "Lucknow");
+		//	CustomerDao customerService;
+		Retailer value=retailerService.addRetailer(retail);
+		assertEquals(retail, value);
 	}
 	@Test
 	public void customerRemoveTest() {
 
-		//Customer customer = new Customer(1, "ritika", "mumbai", "cash");
-		//	CustomerDao customerService;
-		Customer value=custService.deleteCustomer(1);
+		
+		int value=custService.deleteCustomer(13);
 		assertEquals(1, value);
 	}
 	@Test
 	public void goodsRemoveTest() {
 
-		//Goods goods = new Goods(101, "ritika", 2,1212);
-		//	CustomerDao customerService;
-		Goods value=goodsService.deleteGoods(101);
+		
+		int value=goodsService.deleteGoods(125);
 		assertEquals(1, value);
 	}
 	@Test
 	public void supplierRemoveTest() {
 
-		//Supplier sup = new Supplier(1, "shruti", "pune", 2,1,200);
-		//	CustomerDao customerService;
-		Supplier value=supplierService.deleteSupplier(121);
+	
+		int value=supplierService.deleteSupplier(152);
 		assertEquals(1, value);
 	}
+	
+	@Test
+	public void customerUpdateTest() {
+		Customer cust = new Customer(11, "rahul", "mumbai", "card");
+		cust.setCustomerId(11);
+		cust.setPaymentMode("asd");
+		
+		Customer value=custService.updateCustomer(cust);
+		assertEquals(cust, value);
+	}
+	@Test
+	public void goodsUpdateTest() {
+		Goods goods = new Goods(125, "ritika", 2,1322);
+		goods.setGoodsId(102);
+		goods.setGoodsName("Fridge");
+		
+		Goods value=goodsService.updateGoods(goods);
+		assertEquals(goods, value);
+	}
+	@Test
+	public void supplierUpdateTest() {
+		Supplier sup = new Supplier(151, "shruti", "pune", 2,1,500);
+		sup.setSupplierId(151);
+		sup.setAmount(7500);
+		Supplier value=supplierService.updateSupplier(sup);
+		assertEquals(sup, value);
+	}
+	@Test
+	public void retrieveCustomerTest() {
+		 
+		//System.out.println("Customer Details: "+custDetail);
+		int value=retailerService.retrieveCustomer(2);
+		assertEquals(1, value);
+	}
+	
+	
 }

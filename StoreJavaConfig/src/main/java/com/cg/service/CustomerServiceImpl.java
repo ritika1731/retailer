@@ -26,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
-	public Customer deleteCustomer(int customerId) {
+	public int deleteCustomer(int customerId) {
 		// TODO Auto-generated method stub
 		return dao.deleteCustomer(customerId);
 	}

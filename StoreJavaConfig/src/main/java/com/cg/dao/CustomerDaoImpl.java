@@ -36,10 +36,10 @@ public class CustomerDaoImpl implements CustomerDao{
 	}
 
 	@Override
-	public Customer deleteCustomer(int customerId) {
+	public int deleteCustomer(int customerId) {
 		 String sql = "delete from customer where customerId = ?";
 	        jdbcTemplate.update(sql,new Object[]{customerId});
-			return null;
+			return 1;
 		
 		
 	}

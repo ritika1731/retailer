@@ -9,6 +9,6 @@ public interface CustomerDao {
 	public Customer updateCustomer(Customer customer);
 	//public Customer updateCustomer(int customerId);
 
-	public Customer deleteCustomer(int customerId);
+	public int deleteCustomer(int customerId);
 //	public Customer deleteCustomer(Customer customer);
 }

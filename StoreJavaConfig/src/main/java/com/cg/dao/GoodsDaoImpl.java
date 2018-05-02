@@ -31,10 +31,10 @@ public class GoodsDaoImpl implements GoodsDao{
 	}
 
 	@Override
-	public Goods deleteGoods(int goodsId) {
+	public int deleteGoods(int goodsId) {
 		 String sql = "delete from goods where goodsId = ?";
 	        jdbcTemplate.update(sql,new Object[]{goodsId});
-			return null;
+			return 1;
 	
 	}
 

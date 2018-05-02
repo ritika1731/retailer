@@ -1,7 +1,5 @@
 package com.cg.dao;
 
-import javax.sql.DataSource;
-
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.cg.entity.Retailer;
 
@@ -13,7 +11,13 @@ public class RetailerDaoImpl  implements RetailerDao{
 			this.jdbcTemplate=jdbcTemplate;
 			
 		}
-    
+	 @Override
+		public Retailer addRetailer(Retailer retailer) {
+			String query = "insert into retailer (retailerId,retailerName,retailerAddress) values (?,?,?)";
+	        Object[] inputs = new Object[] {retailer.getRetailerId(), retailer.getRetailerName(), retailer.getRetailerAddress()};
+	        jdbcTemplate.update(query, inputs);
+	        return retailer;
+		}
 	@Override
 	public String retrieveGoods(int goodsId) {
 		 String query = "select * from goods where goodsId=?"; 
@@ -24,12 +28,13 @@ public class RetailerDaoImpl  implements RetailerDao{
 	}
 
 	
+	
 	@Override
-	public String retrieveCustomer(int customerId) {
+	public int retrieveCustomer(int customerId) {
 		 String query = "select * from customer where customerId=?"; 
 	        Object[] inputs = new Object[] {customerId};
 	        String cust = jdbcTemplate.queryForObject(query, inputs, String.class);
-	        return cust;
+	        return 1;
 	}
 
 	@Override
@@ -41,14 +46,6 @@ public class RetailerDaoImpl  implements RetailerDao{
 	}
 
 
-	@Override
-	public Retailer addRetailer(Retailer retailer) {
-		String query = "insert into retailer (retailerId,retailerName,retailerAddress) values (?,?,?)";
-        DataSource dataSource = null;
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        Object[] inputs = new Object[] {retailer.getRetailerId(), retailer.getRetailerName(), retailer.getRetailerAddress()};
-        jdbcTemplate.update(query, inputs);
-        return retailer;
-	}
+	
 
 }

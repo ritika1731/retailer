@@ -89,6 +89,7 @@ public class StoreController {
 		supplier.setSupplierId(121);
 		supplierService.deleteSupplier(121);
 
+		
 		//update goods
 		supplier.setSupplierId(121);
 		supplier.setAmount(7500);

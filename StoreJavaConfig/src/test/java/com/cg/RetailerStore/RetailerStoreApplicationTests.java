@@ -1,6 +1,7 @@
 package com.cg.RetailerStore;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class RetailerStoreApplicationTests {
 	@Test
 	public void retailerTest() {
 
-		Retailer retail = new Retailer(159, "Priya", "Lucknow");
+		Retailer retail = new Retailer(160, "Priya", "Lucknow");
 		//	CustomerDao customerService;
 		Retailer value=retailerService.addRetailer(retail);
 		assertEquals(retail, value);
@@ -113,23 +114,23 @@ public class RetailerStoreApplicationTests {
 		Supplier value=supplierService.updateSupplier(sup);
 		assertEquals(sup, value);
 	}
-	/*@Test
+	@Test
 	public void retrieveCustomerTest() {
 		 
 		List<Customer> value=retailerService.retrieveCustomer();
-		assertEquals(1, value);
+		assertTrue(value.contains(value.get(1)));
 	}
 	@Test
 	public void retrieveGoodsTest() {
 		 
 		List<Goods> value=retailerService.retrieveGoods();
-		assertEquals(1, value);
+		assertTrue(value.contains(value.get(1)));
 	}
 	@Test
 	public void retrieveSupplierTest() {
 		 
 		List<Supplier> value=retailerService.retrieveSupplier();
-		assertEquals(1, value);
-	}*/
+		assertTrue(value.contains(value.get(1)));
+	}
 	
 }

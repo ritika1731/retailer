@@ -1,5 +1,7 @@
 package com.cg.controller;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -19,7 +21,6 @@ import com.cg.service.GoodsService;
 import com.cg.service.RetailerService;
 import com.cg.service.SupplierService;
 
-@Configuration
 public class StoreController {
 
 
@@ -30,12 +31,12 @@ public class StoreController {
 	
 	public static void main(String[] args) {
 
-		 ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
+	/*	 ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
 	      	
-		/*CustomerDao custDao = (CustomerDao) context.getBean("customerDao");
+		CustomerDao custDao = (CustomerDao) context.getBean("customerDao");
 		GoodsDao goodsDao = (GoodsDao) context.getBean("goodsDao");
 		SupplierDao supplierDao = (SupplierDao) context.getBean("supplierDao");
-		RetailerDao retailerDao = (RetailerDao) context.getBean("retailerDao");*/
+		RetailerDao retailerDao = (RetailerDao) context.getBean("retailerDao");
 		
 		CustomerService custService = (CustomerService) context.getBean("customerService");
 		GoodsService goodsService = (GoodsService) context.getBean("goodsService");
@@ -99,9 +100,9 @@ public class StoreController {
 		Retailer retail = new Retailer(201,"Shruti","Punjab");
 		
 
-		//retailerDao.addGoods(retail);
-		String custDetail = retailerService.retrieveCustomer(2);
-		System.out.println("Customer Details: "+custDetail);
+		retailerService.addRetailer(retail);
+		List<Customer> custDetail = retailerService.retrieveCustomer();
+		System.out.println("Customer Details: "+custDetail);*/
 	}
 
 }

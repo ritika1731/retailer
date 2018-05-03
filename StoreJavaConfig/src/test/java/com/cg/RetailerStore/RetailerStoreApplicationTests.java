@@ -2,6 +2,8 @@ package com.cg.RetailerStore;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -58,7 +60,7 @@ public class RetailerStoreApplicationTests {
 	@Test
 	public void retailerTest() {
 
-		Retailer retail = new Retailer(144, "Priya", "Lucknow");
+		Retailer retail = new Retailer(159, "Priya", "Lucknow");
 		//	CustomerDao customerService;
 		Retailer value=retailerService.addRetailer(retail);
 		assertEquals(retail, value);
@@ -111,13 +113,23 @@ public class RetailerStoreApplicationTests {
 		Supplier value=supplierService.updateSupplier(sup);
 		assertEquals(sup, value);
 	}
-	@Test
+	/*@Test
 	public void retrieveCustomerTest() {
 		 
-		//System.out.println("Customer Details: "+custDetail);
-		int value=retailerService.retrieveCustomer(2);
+		List<Customer> value=retailerService.retrieveCustomer();
 		assertEquals(1, value);
 	}
-	
+	@Test
+	public void retrieveGoodsTest() {
+		 
+		List<Goods> value=retailerService.retrieveGoods();
+		assertEquals(1, value);
+	}
+	@Test
+	public void retrieveSupplierTest() {
+		 
+		List<Supplier> value=retailerService.retrieveSupplier();
+		assertEquals(1, value);
+	}*/
 	
 }

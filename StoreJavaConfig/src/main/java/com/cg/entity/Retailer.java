@@ -6,23 +6,23 @@ public class Retailer {
 	public int getRetailerId() {
 		return retailerId;
 	}
-	public void setRetailerId(int retailerId) {
+/*	public void setRetailerId(int retailerId) {
 		this.retailerId = retailerId;
-	}
+	}*/
 	private String retailerName;
 	private String retailerAddress;
 	public String getRetailerName() {
 		return retailerName;
 	}
-	public void setRetailerName(String retailerName) {
+	/*public void setRetailerName(String retailerName) {
 		this.retailerName = retailerName;
 	}
-	public String getRetailerAddress() {
+*/	public String getRetailerAddress() {
 		return retailerAddress;
 	}
-	public void setRetailerAddress(String retailerAddress) {
+	/*public void setRetailerAddress(String retailerAddress) {
 		this.retailerAddress = retailerAddress;
-	}
+	}*/
 	/**
 	 * @param retailerName
 	 * @param retailerAddress
@@ -31,21 +31,16 @@ public class Retailer {
 	/**
 	 * 
 	 */
-	public Retailer() {
+	/*public Retailer() {
 		super();
-	}
+	}*/
 	public Retailer(int retailerId, String retailerName, String retailerAddress) {
 		super();
 		this.retailerId = retailerId;
 		this.retailerName = retailerName;
 		this.retailerAddress = retailerAddress;
 	}
-	@Override
-	public String toString() {
-		return "Retailer [retailerId=" + retailerId + ", retailerName=" + retailerName + ", retailerAddress="
-				+ retailerAddress + "]";
-	}
-
+	
 
 
 }

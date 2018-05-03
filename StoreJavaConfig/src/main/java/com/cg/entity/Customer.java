@@ -64,12 +64,7 @@ public class Customer {
 	 * @param i 
 	 * 
 	 */
-		
-	@Override
-	public String toString() {
-		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerAddress="
-				+ customerAddress + ", paymentMode=" + paymentMode + "]";
-	}
+	
 	
 	
 }

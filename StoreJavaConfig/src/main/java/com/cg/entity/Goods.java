@@ -60,11 +60,6 @@ public class Goods {
 		super();
 	}
 	
-	@Override
-	public String toString() {
-		return "Goods [goodsId=" + goodsId + ", goodsName=" + goodsName + ", goodsQuantity=" + goodsQuantity
-				+ ", goodsPrice=" + goodsPrice + "]";
-	}
 	
 	
 	

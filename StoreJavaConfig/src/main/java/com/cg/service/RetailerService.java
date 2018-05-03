@@ -1,14 +1,19 @@
 package com.cg.service;
 
+import java.util.List;
+
+import com.cg.entity.Customer;
+import com.cg.entity.Goods;
 import com.cg.entity.Retailer;
+import com.cg.entity.Supplier;
 
 public interface RetailerService {
 
-	public String retrieveGoods(int goodsId);
+	public List<Goods> retrieveGoods();
 
-	public int retrieveCustomer(int customerId);
+	public List<Customer> retrieveCustomer();
 
-	public String retrieveSupplier(int SupplierId);
+	public List<Supplier> retrieveSupplier();
 	public Retailer addRetailer(Retailer retailer);
 
 }

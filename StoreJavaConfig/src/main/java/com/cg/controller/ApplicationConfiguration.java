@@ -3,7 +3,9 @@ package com.cg.controller;
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -25,8 +27,11 @@ import com.cg.service.SupplierService;
 import com.cg.service.SupplierServiceImpl;
 
 @Configuration
+@ComponentScan(basePackages="com.cg")
+@PropertySource(value= {"classpath:application.properties"})
 public class ApplicationConfiguration {
-
+	 /*@Autowired
+	    private Environment environment;*/
 	@Bean(name="dataSource")
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -35,6 +40,10 @@ public class ApplicationConfiguration {
 		dataSource.setUrl("jdbc:mysql://localhost:3306/store");
 		dataSource.setUsername("root");
 		dataSource.setPassword("root");
+		/*dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName") );
+		dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
+		dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
+		dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));*/
 		return dataSource;
 	}
 

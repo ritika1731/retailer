@@ -12,24 +12,25 @@
 <div align="center">
 <h1>Enter Customer Details</h1>
 </div>
-<form action="add.html" method="post">
+<form action="addNew" method="post">
+<%request.setAttribute("addNew","addNew"); %>
 <table border=1 align="center">
 			<tr>
 				<td><label for="CustomerId">Customer Id</label></td>
 				<td>
-					<input id="CustomerId" required="true" placeholder="Customer ID" />
+					<input type="text" name="customerId" required="true" placeholder="Customer ID" />
 				</td>
 			</tr>
 			<tr>
 				<td><label for="customerName">Customer Name</label></td>
 				<td>
-					<input  id="customerName" required="true" placeholder="Customer Name" />
+					<input type="text" name="customerName" required="true" placeholder="Customer Name" />
 				</td>
 			</tr>
 			<tr>
 				<td><label for="customerAddress">Customer Address</label></td>
 				<td>
-					<input  id="customerAddress" required="true" placeholder="Customer Address" />
+					<input type="text"  name="customerAddress" required="true" placeholder="Customer Address" />
 				</td>
 			</tr>
 			<tr>
@@ -40,16 +41,17 @@
 				</td>
 			</tr>
 			<tr>
-					<td><button type="submit">Add Customer</button></td>
+					<td colspan="2" align="center"><input type="submit" value ="Add"></td>
 			</tr>
 			</table>
-</form>
-<%-- <c:if test="${param.message ne null}">
+
+<c:if test="${param.message ne null}">
 			<div align="center">
 				<h1>${param.message}</h1>
 				<a href="index.html">Index</a>
 			</div>
 			
-		</c:if> --%>
+		</c:if>
+		</form>
 </body>
 </html>

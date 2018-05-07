@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1 align="center">Store Management</h1>
-<h2 align="center"><a href="storeController?action=addNew">Add Customer</a></h2>
-<h2 align="center"><a href="storeController?action=viewAllCustomer">View Customer</a></h2>
+<h2>Customer Added Successfully</h2>
 </body>
 </html>

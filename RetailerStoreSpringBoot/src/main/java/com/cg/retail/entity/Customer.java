@@ -1,9 +1,12 @@
 /**
  * 
  */
-package com.cg.entity;
+package com.cg.retail.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -13,14 +16,20 @@ import javax.persistence.Id;
 @Entity
 public class Customer {
 	@Id
-	private int customerId;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="customerId")
+	private Integer customerId;
+	@Column(name="customerName")
 	private String customerName;
+	@Column(name="customerAddress")
 	private String customerAddress;
+	@Column(name="paymentMode")
+
 	private String paymentMode;
-	public int getCustomerId() {
+	public Integer getCustomerId() {
 		return customerId;
 	}
-	public void setCustomerId(int customerId) {
+	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
 	public String getCustomerName() {
@@ -41,16 +50,10 @@ public class Customer {
 	public void setPaymentMode(String paymentMode) {
 		this.paymentMode = paymentMode;
 	}
-	/**
-	 * @param customerId
-	 * @param customerName
-	 * @param customerAddress
-	 * @param paymentMode
-	 * @param string 
-	 */
-	public Customer(int customerId, String customerName, String customerAddress, String paymentMode) {
+	
+	public Customer( String customerName, String customerAddress, String paymentMode) {
 		super();
-		this.customerId = customerId;
+		
 		this.customerName = customerName;
 		this.customerAddress = customerAddress;
 		this.paymentMode = paymentMode;
@@ -58,14 +61,10 @@ public class Customer {
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
-	/**
-	 * @param string4 
-	 * @param string3 
-	 * @param string2 
-	 * @param string 
-	 * @param i 
-	 * 
-	 */
+	public Customer(Integer customerId) {
+		// TODO Auto-generated constructor stub
+	}
+	
 	
 	
 	

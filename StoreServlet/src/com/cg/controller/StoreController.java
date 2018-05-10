@@ -30,75 +30,7 @@ public class StoreController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-	/*	String qStr= request.getParameter("action");
-		System.out.println("in do get:"+qStr);
-		RequestDispatcher dispatch=null;
-		if("addNew".equals(qStr))
-		{
-			dispatch=request.getRequestDispatcher("addNew.jsp");
-			
-			dispatch.forward(request, response);
-			
-			
-		}
-		System.out.println("in do post:"+qStr);
-		if("add".equals(qStr))
-		{System.out.println("in do:"+qStr);
-			String id=request.getParameter("customerId");
-			System.out.println("my id"+id);
-			int customerId = Integer.parseInt(id);
-			String customerName=request.getParameter("customerName");
-			String customerAddress=request.getParameter("customerAddress");
-			String paymentMode=request.getParameter("paymentMode");
-
-			Customer cust=new Customer();
-			cust.setCustomerId(customerId);
-			System.out.println(customerId);
-			cust.setCustomerName(customerName);
-			cust.setCustomerAddress(customerAddress);
-			cust.setPaymentMode(paymentMode);
-		
-			try{
-				cust=custService.addCustomer(cust);
-				if(cust==null)
-				{
-					throw new StoreException("unable to insert");
-				}
-				else
-				{
-					request.setAttribute("customerId", cust.getCustomerId());
-					dispatch=request.getRequestDispatcher("success.jsp");
-					dispatch.forward(request, response);
-				}
-			}
-			catch(StoreException e)
-			{
-				dispatch=request.getRequestDispatcher("error.jsp");
-				request.setAttribute("errorMsg", e.getMessage());
-				dispatch.forward(request, response);
-
-			}
-		}
-		if("viewAllCustomer".equals(qStr))
-		{
-			try {
-				List<Customer> list=retailerService.retrieveCustomer();
-				request.setAttribute("listCustomer", list);
-				dispatch=request.getRequestDispatcher("home.jsp");
-				dispatch.forward(request, response);
-			} catch (StoreException e) {
-				dispatch=request.getRequestDispatcher("error.jsp");
-				request.setAttribute("errorMsg", e.getMessage());
-				dispatch.forward(request, response);
-			}
-			
-			
-		}
-		
-	}
 	
-*/
 		String qStr= request.getParameter("action");
 		System.out.println("in do get:"+qStr);
 		RequestDispatcher dispatch=null;
@@ -110,27 +42,13 @@ public class StoreController extends HttpServlet {
 			
 			
 		}
-	}
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String qStr= request.getParameter("addNew");
+		
 		System.out.println(request.getParameter("addNew"));
-		System.out.println("in do getaaa:"+qStr);
-		RequestDispatcher dispatch=null;
-		/*if("addNew".equals(qStr))
-		{
-			dispatch=request.getRequestDispatcher("addNew.jsp");
-			
-			dispatch.forward(request, response);
-			
-			
-		}*/
 		System.out.println("in do post:"+qStr);
-		if("addNew".equals(qStr))
-		{System.out.println("in do:"+qStr);
+		String qString= request.getParameter("addNew");
+
+		if("addNew".equals(qString))
+		{System.out.println("in do:"+qString);
 			String id=request.getParameter("customerId");
 			System.out.println("my id"+id);
 			int customerId = Integer.parseInt(id);
@@ -166,6 +84,15 @@ public class StoreController extends HttpServlet {
 
 			}
 		}
+	}
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String qStr= request.getParameter("action");
+		RequestDispatcher dispatch=null;
+
 		if("viewAllCustomer".equals(qStr))
 		{
 			try {

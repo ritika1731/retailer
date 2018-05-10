@@ -19,7 +19,8 @@ public class Customer {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="customerId")
 	private Integer customerId;
-	@Column(name="customerName")
+	@Column(name="customerName",unique=true)
+	//@UniqueElements
 	private String customerName;
 	@Column(name="customerAddress")
 	private String customerAddress;
@@ -63,6 +64,11 @@ public class Customer {
 	}
 	public Customer(Integer customerId) {
 		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerAddress="
+				+ customerAddress + ", paymentMode=" + paymentMode + "]";
 	}
 	
 	

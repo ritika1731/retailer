@@ -5,7 +5,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import com.cg.retail.entity.Customer;
 import com.cg.retail.service.CustomerService;
 
 @SpringBootApplication
@@ -20,6 +19,6 @@ public class RetailerStoreSpringBootApplication implements ApplicationRunner{
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		customerService.addFirstCustomerAutomatically(new Customer("ritika","delhi","card"));
+	//	customerService.addFirstCustomerAutomatically(new Customer("ritika","delhi","card"));
 	}
 }

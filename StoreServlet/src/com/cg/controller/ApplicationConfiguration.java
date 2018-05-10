@@ -36,11 +36,6 @@ public class ApplicationConfiguration {
 	@Bean(name="dataSource")
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		//MySQL database we are using
-		/*dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/store");
-		dataSource.setUsername("root");
-		dataSource.setPassword("root");*/
 		dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName") );
 		dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
 		dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));

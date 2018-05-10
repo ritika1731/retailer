@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.retail.entity.Customer;
 import com.cg.retail.entity.Goods;
+import com.cg.retail.entity.Retailer;
 import com.cg.retail.entity.Supplier;
 import com.cg.retail.exception.StoreException;
 import com.cg.retail.service.CustomerService;
 import com.cg.retail.service.GoodsService;
+import com.cg.retail.service.RetailerService;
 import com.cg.retail.service.SupplierService;
 
 @RestController
@@ -33,6 +35,9 @@ public class StoreController {
 
 	@Autowired
 	private GoodsService goodsService;
+	
+	@Autowired
+	private RetailerService retailService;
 	
 	
 	@PostMapping(path="/addCustomer")
@@ -164,6 +169,17 @@ public class StoreController {
 	{
 		Object goods=goodsService.viewbyId(Goods);
 		return new ResponseEntity<Object>(goods,HttpStatus.OK);
+		
+	}
+	
+	//Retailer
+	
+
+	@PostMapping(path="/addRetailer")
+	public ResponseEntity<Retailer> addRetailer(@RequestBody Retailer retailer)
+	{
+		Retailer cust=retailService.addRetailer(retailer);
+		return new ResponseEntity<Retailer>(cust,HttpStatus.CREATED); 
 		
 	}
 }

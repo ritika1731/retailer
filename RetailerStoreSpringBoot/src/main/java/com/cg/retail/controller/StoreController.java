@@ -2,6 +2,7 @@ package com.cg.retail.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ import com.cg.retail.service.SupplierService;
 @RestController
 
 public class StoreController {
-	
+	private final static Logger LOGGER = Logger.getLogger(StoreController.class.getName());
 	@Autowired
 	private CustomerService custService;
 	
@@ -46,7 +47,8 @@ public class StoreController {
 		Customer cust=custService.addCustomer(customer);
 		if((customer.getCustomerName()==null)|| (customer.getCustomerAddress()==null)||(customer.getPaymentMode()==null))
 		{
-			throw new StoreException("unable to insert");
+			LOGGER.error("Null values present");
+			throw new StoreException("unable to insert,Null values present");
 		}
 		else
 		{
@@ -55,28 +57,36 @@ public class StoreController {
 	}
 	
 	@GetMapping(path="/viewCustomer")
-	public ResponseEntity<List<Customer>> viewCustomer()
+	public ResponseEntity<?> viewCustomer()
 	{
 		
-		List<Customer> custList= custService.getCustomer();
-		return new ResponseEntity<List<Customer>>(custList,HttpStatus.OK);
+		try {
+			List<Customer> custList= custService.getCustomer();
+			return new ResponseEntity<List<Customer>>(custList,HttpStatus.OK);
+		} catch (StoreException e) {
+			// TODO Auto-generated catch block
+			String msg = e.getMessage();
+			return new ResponseEntity<String>(msg, HttpStatus.OK);
+		}
 
 		
 	}
 	
 	@DeleteMapping(path="/deleteCustomer")
-	public ResponseEntity<Customer> deleteCustomer( @RequestBody Integer customerId)
+	public ResponseEntity<?> deleteCustomer( @RequestBody Integer customerId)
 	{
-		Customer cust= custService.deleteCustomer(customerId);
 		
-		return  new ResponseEntity<Customer>(cust,HttpStatus.OK); 
+			Customer cust= custService.deleteCustomer(customerId);
+			return  new ResponseEntity<Customer>(cust,HttpStatus.OK);
+
+		 
 	}
 	
 	@PutMapping(path="/updateCustomer")
 	public ResponseEntity<Customer> updateCustomer(@RequestBody Integer customerId)
 	{
 		Customer cust=  custService.updateCustomer(customerId);
-		return  new ResponseEntity<Customer>(cust,HttpStatus.OK); 
+		return  new ResponseEntity<Customer>(cust,HttpStatus.OK);
 
 	}
 	

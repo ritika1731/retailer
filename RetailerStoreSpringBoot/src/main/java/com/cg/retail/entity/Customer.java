@@ -9,16 +9,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
+
 /**
  * @author RITIKA
  *
  */
 @Entity
+//@Ritika
 public class Customer {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="customerId")
-	private Integer customerId;
+	 private Integer customerId;
 	@Column(name="customerName",unique=true)
 	//@UniqueElements
 	private String customerName;

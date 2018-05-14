@@ -5,7 +5,7 @@ import java.lang.annotation.*;
 @Documented
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)  
-@Target(ElementType.METHOD)  
+@Target(ElementType.TYPE)  
  public @interface Ritika {
 
 	String author() default "Pankaj";

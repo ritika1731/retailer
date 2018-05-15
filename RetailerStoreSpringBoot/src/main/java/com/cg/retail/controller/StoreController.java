@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,7 +65,7 @@ public class StoreController {
 			List<Customer> custList= custService.getCustomer();
 			return new ResponseEntity<List<Customer>>(custList,HttpStatus.OK);
 		} catch (StoreException e) {
-			// TODO Auto-generated catch block
+			
 			String msg = e.getMessage();
 			return new ResponseEntity<String>(msg, HttpStatus.OK);
 		}

@@ -1,6 +1,8 @@
 package com.cg.controller;
 
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import com.cg.services.CustomerServiceImpl;
 
 @Controller
 public class CustomerController {
+	private final static Logger LOGGER = Logger.getLogger(CustomerController.class.getName());
+
 	@Autowired
 	CustomerServiceImpl custService;
 
@@ -51,7 +55,8 @@ public class CustomerController {
 			return new ResponseEntity<Object>(customers, HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			throw new BankException("fid doesn't exists");
+			LOGGER.error("id doesn't exists");
+			throw new BankException("id doesn't exists");
 		}
 
 	}

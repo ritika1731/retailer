@@ -2,6 +2,7 @@ package com.cg.controller;
 
 import java.math.BigDecimal;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import com.cg.set.AccountRequest;
 
 @Controller
 public class AccountController {
+	private final static Logger LOGGER = Logger.getLogger(AccountController.class.getName());
 
 	@Autowired
 	AccountService accService;

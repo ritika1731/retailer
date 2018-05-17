@@ -3,6 +3,7 @@ package com.cg.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import com.cg.repository.CustomerRepository;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
+	private final static Logger LOGGER = Logger.getLogger(CustomerService.class.getName());
 
 	@Autowired
 	CustomerRepository custRepo;

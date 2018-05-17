@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.byLessThan;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.mockito.internal.matchers.LessThan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import com.cg.set.ATMRequest;
 
 @Service
 public class ATMServiceImpl implements ATMService {
+	private final static Logger LOGGER = Logger.getLogger(ATMService.class.getName());
 
 	@Autowired
 	ATMRepository atmRepo;

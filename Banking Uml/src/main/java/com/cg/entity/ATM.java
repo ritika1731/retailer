@@ -1,32 +1,43 @@
 package com.cg.entity;
 
 import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Bank {
+public class ATM {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer Id;
+	private Integer atmId;
 	private BigDecimal amount;
+	@ManyToOne
+	private Bank bank;
 
 	/**
-	 * @return the id
+	 * @return the atmId
 	 */
-	public Integer getId() {
-		return Id;
+	public Integer getAtmId() {
+		return atmId;
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
+	 * @param atmId
+	 *            the atmId to set
 	 */
-	public void setId(Integer id) {
-		Id = id;
+	public void setAtmId(Integer atmId) {
+		this.atmId = atmId;
+	}
+
+	/**
+	 * @return the bank
+	 */
+	public Bank getBank() {
+		return bank;
 	}
 
 	/**
@@ -45,19 +56,22 @@ public class Bank {
 	}
 
 	/**
-	 * @param id
+	 * @param aTMId
 	 * @param amount
+	 * @param bankId
 	 */
-	public Bank(BigDecimal amount) {
+	public ATM(BigDecimal amount, Bank bank) {
 		super();
 
 		this.amount = amount;
+		this.bank = bank;
+
 	}
 
 	/**
-	 * Default Constructor
+	 * 
 	 */
-	public Bank() {
+	public ATM() {
 		super();
 	}
 
@@ -68,7 +82,15 @@ public class Bank {
 	 */
 	@Override
 	public String toString() {
-		return "Bank [Id=" + Id + ", amount=" + amount + "]";
+		return "ATM [atmId=" + atmId + ", amount=" + amount + "]";
+	}
+
+	/**
+	 * @param bank
+	 *            the bank to set
+	 */
+	public void setBank(Bank bank) {
+		this.bank = bank;
 	}
 
 }

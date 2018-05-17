@@ -4,22 +4,35 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Customer {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer customerId;
-	
-	 
-	 @JoinColumn(name = "bankId")
-	 private Integer bankId;
-	 
-	 private String name;
-	 
-	 private Integer pin;
+
+	private String name;
+
+	private Integer pin;
+	@ManyToOne
+	private Bank bank;
+
+	/**
+	 * @param customerId
+	 * @param bankId
+	 * @param name
+	 * @param pin
+	 * @param account
+	 */
+	public Customer(String name, Integer pin, Bank bank) {
+		super();
+
+		this.name = name;
+		this.pin = pin;
+		this.bank = bank;
+	}
 
 	/**
 	 * @return the customerId
@@ -29,24 +42,11 @@ public class Customer {
 	}
 
 	/**
-	 * @param customerId the customerId to set
+	 * @param customerId
+	 *            the customerId to set
 	 */
 	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
-	}
-
-	/**
-	 * @return the bankId
-	 */
-	public Integer getBankId() {
-		return bankId;
-	}
-
-	/**
-	 * @param bankId the bankId to set
-	 */
-	public void setBankId(Integer bankId) {
-		this.bankId = bankId;
 	}
 
 	/**
@@ -57,7 +57,8 @@ public class Customer {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -71,25 +72,16 @@ public class Customer {
 	}
 
 	/**
-	 * @param pin the pin to set
+	 * @param pin
+	 *            the pin to set
 	 */
 	public void setPin(Integer pin) {
 		this.pin = pin;
 	}
 
 	/**
-	 * @param customerId
-	 * @param bankId
-	 * @param name
-	 * @param pin
+	 * @return the account
 	 */
-	public Customer(Integer customerId, Integer bankId, String name, Integer pin) {
-		super();
-		this.customerId = customerId;
-		this.bankId = bankId;
-		this.name = name;
-		this.pin = pin;
-	}
 
 	/**
 	 * 
@@ -98,14 +90,29 @@ public class Customer {
 		super();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", bankId=" + bankId + ", name=" + name + ", pin=" + pin + "]";
+		return "Customer [customerId=" + customerId + ", name=" + name + ", pin=" + pin + ", bank=" + bank + "]";
 	}
-	 
-	 
-	
+
+	/**
+	 * @param bank
+	 *            the bank to set
+	 */
+	public void setBank(Bank bank) {
+		this.bank = bank;
+	}
+
+	/**
+	 * @return the bank
+	 */
+	public Bank getBank() {
+		return bank;
+	}
+
 }

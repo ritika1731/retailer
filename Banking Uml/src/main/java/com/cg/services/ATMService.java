@@ -11,5 +11,5 @@ public interface ATMService {
 
 	public ATM addMoneyFromBank(BigDecimal amount, Integer atmId);
 
-	public ATM withdraw(BigDecimal amount, Integer atmId);
+	//public ATM withdraw(BigDecimal amount, Integer atmId);
 }

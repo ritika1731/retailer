@@ -1,13 +1,20 @@
 package com.cg.services;
 
+import java.util.List;
+
+import com.cg.entity.Account;
 import com.cg.entity.Customer;
 import com.cg.entity.Transaction;
 import com.cg.set.TransactionRequest;
 
 public interface TransactionService {
 
-	public Transaction createAccount(TransactionRequest transacReq);
+	//public Transaction createTransaction(TransactionRequest transactionReq, String transacType);
+	
+	public Transaction createTransaction(Account account, String transacType);
 
-	public Object generateTrasactionReport(Customer customer);
+	public List<Transaction> generateTrasactionReport();
+
+
 
 }

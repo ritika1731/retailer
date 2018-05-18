@@ -27,11 +27,9 @@ public class ATMController {
 	public ResponseEntity<ATM> createAtm(@RequestBody ATMRequest atmReq) {
 
 		ATM atm = atmService.createATM(atmReq);
-		if ((atm.getAmount()!= null)) {
+		if ((atm.getAmount() != null)) {
 			return new ResponseEntity<ATM>(atm, HttpStatus.CREATED);
-		}
-		else
-		{
+		} else {
 			throw new BankException("null value not accepted");
 		}
 
@@ -49,14 +47,5 @@ public class ATMController {
 		}
 	}
 
-	@PostMapping(path = "/withdrawAtmMoney/{atmId}/{amount}")
-	public ResponseEntity<ATM> withdrawATMMoney(@PathVariable Integer atmId, @PathVariable BigDecimal amount) {
-		try {
-			ATM atm = atmService.withdraw(amount, atmId);
-			return new ResponseEntity<ATM>(atm, HttpStatus.CREATED);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			throw new BankException("Failed to withdraw");
-		}
-	}
+	
 }

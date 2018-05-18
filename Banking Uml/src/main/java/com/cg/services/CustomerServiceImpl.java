@@ -32,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
 			return custRepo.save(cust);
 
 		} else {
-			return customer;
+			return null;
 		}
 	}
 

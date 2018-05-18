@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.byLessThan;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.apache.log4j.Logger;
 import org.mockito.internal.matchers.LessThan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import com.cg.repository.ATMRepository;
 import com.cg.repository.AccountRepository;
 import com.cg.repository.BankRepository;
 import com.cg.set.ATMRequest;
+import com.cg.set.TransactionRequest;
 
 @Service
 public class ATMServiceImpl implements ATMService {
@@ -29,6 +32,9 @@ public class ATMServiceImpl implements ATMService {
 	BankRepository bankRepo;
 	@Autowired
 	AccountRepository accRepo;
+	@Autowired
+	TransactionService transactionService;
+	
 
 	@Override
 	public ATM createATM(ATMRequest atmReq) {
@@ -62,27 +68,6 @@ public class ATMServiceImpl implements ATMService {
 		return atm;
 	}
 
-	@Override
-	public ATM withdraw(BigDecimal amount, Integer atmId) {
-		Optional<ATM> atmOp = atmRepo.findById(atmId);
-		ATM atm = atmOp.get();
-		Optional<Account> accOpt = accRepo.findById(atm.getBank().getId());
-		Account account = accOpt.get();
-		/*
-		 * if (accOp == null) { throw new BankException("Account not found "); }
-		 */
-		try {
-			BigDecimal amounts = atm.getAmount().subtract(amount);
-			atm.setAmount(amounts);
-			atmRepo.save(atm);
-			BigDecimal bankAmount = account.getAmount().subtract(amount);
-			account.setAmount(bankAmount);
-			accRepo.save(account);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			throw new BankException("Can't withdraw");
-		}
-		return atm;
-	}
+	
 
 }

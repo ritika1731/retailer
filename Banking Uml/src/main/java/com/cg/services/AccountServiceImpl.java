@@ -3,14 +3,20 @@ package com.cg.services;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.cg.controller.CustomerController;
+import com.cg.entity.ATM;
 import com.cg.entity.Account;
 import com.cg.entity.Bank;
 import com.cg.entity.Customer;
 import com.cg.exception.BankException;
+import com.cg.repository.ATMRepository;
 import com.cg.repository.AccountRepository;
 import com.cg.repository.BankRepository;
 import com.cg.repository.CustomerRepository;
@@ -18,14 +24,19 @@ import com.cg.set.AccountRequest;
 
 @Service
 public class AccountServiceImpl implements AccountService {
+	private final static Logger LOGGER = Logger.getLogger(AccountService.class.getName());
 
 	@Autowired
 	AccountRepository accRepo;
 	@Autowired
 	BankRepository bankRepo;
+	@Autowired
+	ATMRepository atmRepo;
 
 	@Autowired
 	CustomerRepository custRepo;
+	@Autowired
+	TransactionService transactionService;
 
 	public Account createAccount(AccountRequest acctReq) {
 
@@ -75,6 +86,8 @@ public class AccountServiceImpl implements AccountService {
 			BigDecimal bankAmount = bank.getAmount().add(amount);
 			bank.setAmount(bankAmount);
 			bankRepo.save(bank);
+			transactionService.createTransaction(account, "Credit");
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			throw new BankException("deposit failed");
@@ -83,14 +96,16 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public Account withdraw(Integer accountId, BigDecimal amount) {
+	@Transactional
+	public Account withdraw(Integer accountId, BigDecimal amount,String select,Integer atmId) {
 		Optional<Account> accOp = accRepo.findById(accountId);
 		Account account = accOp.get();
 
 		Optional<Bank> bankOpt = bankRepo.findById(account.getCustomer().getBank().getId());
 		Bank bank = bankOpt.get();
 
-		try {
+		if(select.equals("bank"))
+		{
 			BigDecimal amounts = account.getAmount().subtract(amount);
 			account.setAmount(amounts);
 			accRepo.save(account);
@@ -98,11 +113,28 @@ public class AccountServiceImpl implements AccountService {
 			BigDecimal bankAmount = bank.getAmount().subtract(amount);
 			bank.setAmount(bankAmount);
 			bankRepo.save(bank);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			throw new BankException("withdraw failed");
+			transactionService.createTransaction(account, "debit");
+			}
+		else if(select.equals("atm"))
+		{
+			Optional<ATM> atmOp = atmRepo.findById(atmId);
+			ATM atm = atmOp.get();
+			
+				
+				BigDecimal amounts = atm.getAmount().subtract(amount);
+				atm.setAmount(amounts);
+				atmRepo.save(atm);
+				BigDecimal accamount = account.getAmount().subtract(amount);
+				account.setAmount(accamount);
+				accRepo.save(account);
+				
+				transactionService.createTransaction(account, "debit");
+			}
+		else
+		{
+			throw new BankException("bank or atm");
 		}
 		return account;
-	}
+		}
 
 }

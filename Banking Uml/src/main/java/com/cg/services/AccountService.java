@@ -13,6 +13,5 @@ public interface AccountService {
 
 	public Account depositMoney(Integer accountId, BigDecimal amount);
 
-	public Account withdraw(Integer accountId, BigDecimal amount);
-
+	public Account withdraw(Integer accountId, BigDecimal amount,String select,Integer atmId);
 }

@@ -1,11 +1,12 @@
 package com.cg.set;
 
+import com.cg.entity.Account;
 import com.cg.entity.Transaction;
 
 public class TransactionRequest {
 
 	private Integer customerId;
-	private Integer accountId;
+	private Account account;
 	private Transaction transaction;
 
 	/**
@@ -24,18 +25,18 @@ public class TransactionRequest {
 	}
 
 	/**
-	 * @return the accountId
+	 * @return the account
 	 */
-	public Integer getAccountId() {
-		return accountId;
+	public Account getAccount() {
+		return account;
 	}
 
 	/**
-	 * @param accountId
-	 *            the accountId to set
+	 * @param account
+	 *            the account to set
 	 */
-	public void setAccountId(Integer accountId) {
-		this.accountId = accountId;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	/**
@@ -52,5 +53,9 @@ public class TransactionRequest {
 	public void setTransaction(Transaction transaction) {
 		this.transaction = transaction;
 	}
+
+	/**
+	 * @return the transactionType
+	 */
 
 }

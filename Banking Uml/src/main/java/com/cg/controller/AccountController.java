@@ -63,10 +63,10 @@ public class AccountController {
 
 	}
 
-	@PostMapping(path = "/withdrawMoney/{accountId}/{amount}")
-	public ResponseEntity<Account> withdrawMoney(@PathVariable Integer accountId, @PathVariable BigDecimal amount) {
+	@PostMapping(path = "/withdrawMoney/{accountId}/{amount}/{select}/{atmId}")
+	public ResponseEntity<Account> withdrawMoney(@PathVariable Integer accountId, @PathVariable BigDecimal amount,@PathVariable String select,@PathVariable Integer atmId) {
 		try {
-			Account account = accService.withdraw(accountId, amount);
+			Account account = accService.withdraw(accountId, amount,select,atmId);
 			return new ResponseEntity<Account>(account, HttpStatus.CREATED);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

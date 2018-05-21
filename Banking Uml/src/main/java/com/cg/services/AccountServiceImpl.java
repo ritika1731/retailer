@@ -32,7 +32,6 @@ public class AccountServiceImpl implements AccountService {
 	BankRepository bankRepo;
 	@Autowired
 	ATMRepository atmRepo;
-
 	@Autowired
 	CustomerRepository custRepo;
 	@Autowired
@@ -48,12 +47,19 @@ public class AccountServiceImpl implements AccountService {
 		Account account = acctReq.getAccount();
 		account.setCustomer(customer);
 		account.setBank(bank);
-
-		BigDecimal amountBank = account.getAmount();
-		bank.setAmount(bank.getAmount().add(amountBank));
-		bankRepo.save(bank);
-
-		return accRepo.save(account);
+		if (bankOpt.isPresent() && custOpt.isPresent()) {
+			BigDecimal amountBank = account.getAmount();
+			bank.setAmount(bank.getAmount().add(amountBank));
+			bankRepo.save(bank);
+			return accRepo.save(account);
+		}
+		else
+		{
+			throw new BankException("bank or cust id doesn't exist");
+		}
+	
+ 
+		
 	}
 
 	public Object getAccountDetailsById(@RequestBody Account account) {
@@ -97,15 +103,14 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	@Transactional
-	public Account withdraw(Integer accountId, BigDecimal amount,String select,Integer atmId) {
+	public Account withdraw(Integer accountId, BigDecimal amount, String select, Integer atmId) {
 		Optional<Account> accOp = accRepo.findById(accountId);
 		Account account = accOp.get();
 
 		Optional<Bank> bankOpt = bankRepo.findById(account.getCustomer().getBank().getId());
 		Bank bank = bankOpt.get();
 
-		if(select.equals("bank"))
-		{
+		if (select.equals("bank")) {
 			BigDecimal amounts = account.getAmount().subtract(amount);
 			account.setAmount(amounts);
 			accRepo.save(account);
@@ -114,27 +119,22 @@ public class AccountServiceImpl implements AccountService {
 			bank.setAmount(bankAmount);
 			bankRepo.save(bank);
 			transactionService.createTransaction(account, "debit");
-			}
-		else if(select.equals("atm"))
-		{
+		} else if (select.equals("atm")) {
 			Optional<ATM> atmOp = atmRepo.findById(atmId);
 			ATM atm = atmOp.get();
-			
-				
-				BigDecimal amounts = atm.getAmount().subtract(amount);
-				atm.setAmount(amounts);
-				atmRepo.save(atm);
-				BigDecimal accamount = account.getAmount().subtract(amount);
-				account.setAmount(accamount);
-				accRepo.save(account);
-				
-				transactionService.createTransaction(account, "debit");
-			}
-		else
-		{
+
+			BigDecimal amounts = atm.getAmount().subtract(amount);
+			atm.setAmount(amounts);
+			atmRepo.save(atm);
+			BigDecimal accamount = account.getAmount().subtract(amount);
+			account.setAmount(accamount);
+			accRepo.save(account);
+
+			transactionService.createTransaction(account, "debit");
+		} else {
 			throw new BankException("bank or atm");
 		}
 		return account;
-		}
+	}
 
 }

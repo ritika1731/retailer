@@ -31,7 +31,7 @@ public class Account {
 
 	/**
 	 * @param customer
-	 * @param amount
+	 * @param amount 
 	 * @param bank
 	 */
 	public Account(Customer customer, BigDecimal amount, Bank bank) {

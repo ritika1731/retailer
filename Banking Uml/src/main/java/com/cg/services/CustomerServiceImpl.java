@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.log4j.Logger;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,19 +21,23 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	CustomerRepository custRepo;
+	
+	/*@InjectMocks
+	CustomerRepository repoCust;*/
+	
 	@Autowired
 	BankRepository bankRepo;
 
 	public Customer createCustomer(@RequestBody Customer customer) {
-		Optional<Bank> ob = bankRepo.findById(1);
-		Bank obj = ob.get();
-		System.out.println(obj);
-		if (obj != null) {
-			Customer cust = new Customer(customer.getName(), customer.getPin(), obj);
-			return custRepo.save(cust);
-
+		Optional<Bank> ob = bankRepo.findById(customer.getBank().getId());
+		//Bank obj = ob.get();
+		//System.out.println(obj);
+		if (ob.isPresent()) {
+			final Customer cust = custRepo.save(customer);
+			return cust;
+			
 		} else {
-			return null;
+			throw new BankException("Customer or bank details is invalid");
 		}
 	}
 

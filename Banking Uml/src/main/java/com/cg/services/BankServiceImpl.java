@@ -19,9 +19,12 @@ public class BankServiceImpl implements BankService {
 	BankRepository bankRepo;
 
 	public Bank createBank(@RequestBody Bank bank) {
+		if ((bank.getAmount().intValue()) < 0) {
+			throw new BankException("negative amount");
 
-		return bankRepo.save(bank);
-
+		} else {
+			return bankRepo.save(bank);
+		}
 	}
 
 	public Object getBankDetailsById(@RequestBody Bank bank) {

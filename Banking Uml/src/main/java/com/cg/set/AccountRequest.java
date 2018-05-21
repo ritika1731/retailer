@@ -53,4 +53,16 @@ public class AccountRequest {
 		this.account = account;
 	}
 
+	/**
+	 * @param bankId
+	 * @param customerId
+	 * @param account
+	 */
+	public AccountRequest(Integer bankId, Integer customerId, Account account) {
+		super();
+		this.bankId = bankId;
+		this.customerId = customerId;
+		this.account = account;
+	}
+
 }

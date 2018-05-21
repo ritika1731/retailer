@@ -50,7 +50,7 @@ public class Bank {
 	 */
 	public Bank(BigDecimal amount) {
 		super();
-
+	
 		this.amount = amount;
 	}
 

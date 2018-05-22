@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -65,10 +66,11 @@ public class AccountTest {
 	}
 
 	@Test(expected = BankException.class)
-	public void createAccounts() {
+	
+	public void checkAccount() {
 		Bank bank = new Bank(new BigDecimal(1200));
-		bank.setId(1);
-
+		//bank.setId(1);
+		//Optional<Bank> bnk = Optional.of(bank);
 		final Optional<Bank> banks = Optional.empty();
 
 		Customer customer = new Customer("ritika", 2131, bank);
@@ -80,11 +82,10 @@ public class AccountTest {
 		AccountRequest accReq = new AccountRequest(1, 4, account);
 
 		when(bankRepo.findById(Mockito.any(Integer.class))).thenReturn(banks);
-
 		when(custRepo.findById(Mockito.any(Integer.class))).thenReturn(customers);
 
-		// when(accRepo.save(account)).thenReturn(account);
-		when(accSer.createAccount(accReq)).thenThrow(new BankException("details invalid"));
+		 when(accRepo.save(account)).thenReturn(account);
+		accSer.createAccount(accReq);
 
 	}
 	
@@ -92,22 +93,43 @@ public class AccountTest {
 	public void deposit() {
 		Bank bank = new Bank(new BigDecimal(1200));
 		bank.setId(1);
-		//Optional<Bank> bnk = Optional.of(bank);
+		Optional<Bank> bnk = Optional.of(bank);
 		Customer customer = new Customer("ritika", 2131, bank);
 		customer.setCustomerId(4);
-		//Optional<Customer> cust = Optional.of(customer);
+		Optional<Customer> cust = Optional.of(customer);
 		final Account account=new Account(customer,new BigDecimal(100),bank);
-		final Optional<Account> demoAccount=Optional.of(account);
-		when(accRepo.findById(1)).thenReturn(demoAccount);
+		account.setAccountId(2);
+		final Optional<Account> acc=Optional.of(account);
+		when(accRepo.findById(2)).thenReturn(acc);
 		
 		/*final Bank bank=new Bank(new BigDecimal(100));
 		bank.setId(1);*/
 		final Optional<Bank>banks=Optional.of(bank);
 		when(bankRepo.findById(1)).thenReturn(banks);
 		
-		final Account accounts=new Account(customer,new BigDecimal(200),bank);
-		when(accRepo.save(Mockito.<Account>any())).thenReturn(accounts);
+		//final Account accounts=new Account(customer,new BigDecimal(200),bank);
+		when(accRepo.save(Mockito.<Account>any())).thenReturn(account);
 		
-		//assertThat(actual, matcher);
+		//assertThat(accSer.depositMoney(2,new BigDecimal(100)), is(notNullValue()));
+		
+		assertEquals(account,accSer.depositMoney(1, new BigDecimal(20)));
+	
+	}
+	 
+	@Test
+	public void viewAccount() {
+		final Bank bank = new Bank(new BigDecimal(0));
+		bank.setId(1);
+		Optional<Bank> bnk = Optional.of(bank);
+		final Customer customer = new Customer("ritika", 1231, bank);
+		customer.setCustomerId(2);
+		Optional<Customer> cust = Optional.of(customer);
+		final Account account=new Account(customer,new BigDecimal(100),bank);
+		account.setAccountId(3);
+		final Optional<Account> acc=Optional.of(account);
+		when(accRepo.findById(3)).thenReturn(acc);
+
+		assertThat(accSer.getAccountDetailsById(account), is(notNullValue()));
+
 	}
 }

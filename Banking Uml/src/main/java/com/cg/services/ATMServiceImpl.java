@@ -1,26 +1,19 @@
 package com.cg.services;
 
-import static org.assertj.core.api.Assertions.byLessThan;
-
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.apache.log4j.Logger;
-import org.mockito.internal.matchers.LessThan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.entity.ATM;
-import com.cg.entity.Account;
 import com.cg.entity.Bank;
 import com.cg.exception.BankException;
 import com.cg.repository.ATMRepository;
 import com.cg.repository.AccountRepository;
 import com.cg.repository.BankRepository;
 import com.cg.set.ATMRequest;
-import com.cg.set.TransactionRequest;
 
 @Service
 public class ATMServiceImpl implements ATMService {
@@ -40,13 +33,19 @@ public class ATMServiceImpl implements ATMService {
 	public ATM createATM(ATMRequest atmReq) {
 
 		Optional<Bank> atmOpt = bankRepo.findById(atmReq.getBankId());
-		Bank bank = atmOpt.get();
-
+		
+		if(atmOpt.isPresent())
+		{
 		ATM atm = atmReq.getAtm();
+		Bank bank = atmOpt.get();
 		atm.setBank(bank);
-
 		return atmRepo.save(atm);
-	}
+		}
+		else
+		{
+			throw new BankException("Id not found");
+		}
+	} 
 
 	@Override
 	public ATM addMoneyFromBank(BigDecimal amount, Integer atmId) {

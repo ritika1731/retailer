@@ -65,4 +65,12 @@ public class AccountRequest {
 		this.account = account;
 	}
 
+	/**
+	 * 
+	 */
+	public AccountRequest() {
+		super();
+	}
+
+	
 }

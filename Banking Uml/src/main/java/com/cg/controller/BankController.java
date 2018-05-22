@@ -28,7 +28,7 @@ public class BankController {
 	@PostMapping(path = "/createBank")
 	public ResponseEntity<Bank> createBank(@RequestBody Bank bank) {
 		Bank banks = bankService.createBank(bank);
-		if ((bank.getAmount() != null)) {
+		if ((bank.getAmount() == null)) {
 			LOGGER.error("Null values present");
 			throw new BankException("unable to insert,Null values present");
 		} else {

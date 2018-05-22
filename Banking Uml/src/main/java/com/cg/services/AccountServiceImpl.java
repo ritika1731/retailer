@@ -36,30 +36,30 @@ public class AccountServiceImpl implements AccountService {
 	CustomerRepository custRepo;
 	@Autowired
 	TransactionService transactionService;
+	@Autowired
+	BankDenominationService bankdenoSer;
 
 	public Account createAccount(AccountRequest acctReq) {
 
 		Optional<Bank> bankOpt = bankRepo.findById(acctReq.getBankId());
-		Bank bank = bankOpt.get();
+		// Bank bank = bankOpt.get();
 
 		Optional<Customer> custOpt = custRepo.findById(acctReq.getCustomerId());
-		Customer customer = custOpt.get();
-		Account account = acctReq.getAccount();
-		account.setCustomer(customer);
-		account.setBank(bank);
+
 		if (bankOpt.isPresent() && custOpt.isPresent()) {
+			Bank bank = bankOpt.get();
+			Customer customer = custOpt.get();
+			Account account = acctReq.getAccount();
+			account.setCustomer(customer);
+			account.setBank(bank);
 			BigDecimal amountBank = account.getAmount();
 			bank.setAmount(bank.getAmount().add(amountBank));
 			bankRepo.save(bank);
 			return accRepo.save(account);
-		}
-		else
-		{
+		} else {
 			throw new BankException("bank or cust id doesn't exist");
 		}
-	
- 
-		
+
 	}
 
 	public Object getAccountDetailsById(@RequestBody Account account) {
@@ -93,7 +93,7 @@ public class AccountServiceImpl implements AccountService {
 			bank.setAmount(bankAmount);
 			bankRepo.save(bank);
 			transactionService.createTransaction(account, "Credit");
-
+			bankdenoSer.addDemomination(bank, amount);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			throw new BankException("deposit failed");
@@ -131,6 +131,8 @@ public class AccountServiceImpl implements AccountService {
 			accRepo.save(account);
 
 			transactionService.createTransaction(account, "debit");
+			bankdenoSer.addDemomination(bank, amount);
+
 		} else {
 			throw new BankException("bank or atm");
 		}

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.cg.entity.Customer;
 import com.cg.exception.BankException;
 import com.cg.services.CustomerServiceImpl;
+import com.cg.set.CustomerReq;
 
 @Controller
 public class CustomerController {
@@ -26,9 +27,9 @@ public class CustomerController {
 	/** CUSTOMER **/
 
 	@PostMapping(path = "/createCustomer")
-	public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+	public ResponseEntity<Customer> createCustomer(@RequestBody CustomerReq custReq) {
 
-		Customer customers = custService.createCustomer(customer);
+		Customer customers = custService.createCustomer(custReq);
 				
 		return new ResponseEntity<Customer>(customers, HttpStatus.CREATED);
 

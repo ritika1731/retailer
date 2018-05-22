@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,16 +34,29 @@ public class BankTests {
 	public void createBank() {
 		final Bank bank = new Bank(new BigDecimal(0));
 		when(repoMock.save(bank)).thenReturn(bank);
-		//System.out.println(bank);
+		// System.out.println(bank);
 		assertThat(bankSer.createBank(bank), is(notNullValue()));
 	}
-	
-	@Test(expected=BankException.class)
-	public void createBanks() {
+
+	@Test(expected = BankException.class)
+	public void checkBank() {
 		final Bank bank = new Bank(new BigDecimal(-1));
-		when(bankSer.createBank(bank)).thenThrow(new BankException("negative amount"));
-		//System.out.println(bank);
-		//assertThat(bankSer.createBank(bank), is(notNullValue()));
+		when(repoMock.save(bank)).thenReturn(bank);
+
+		bankSer.createBank(bank);
+
+	}
+
+	@Test
+	public void viewBank() {
+		final Bank bank = new Bank(new BigDecimal(0));
+		bank.setId(1);
+		Optional<Bank> bnk = Optional.of(bank);
+
+		when(repoMock.findById(1)).thenReturn(bnk);
+
+		assertThat(bankSer.getBankDetailsById(bank), is(notNullValue()));
+
 	}
 
 }

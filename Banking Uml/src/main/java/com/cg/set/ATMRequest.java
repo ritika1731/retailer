@@ -53,4 +53,17 @@ public class ATMRequest {
 		this.bankId = bankId;
 	}
 
+	/**
+	 * @param atm
+	 * @param bankId
+	 * @param accountId
+	 */
+	public ATMRequest(ATM atm, Integer bankId) {
+		super();
+		this.atm = atm;
+		this.bankId = bankId;
+	
+	}
+
+	
 }

@@ -14,6 +14,7 @@ import com.cg.entity.Customer;
 import com.cg.exception.BankException;
 import com.cg.repository.BankRepository;
 import com.cg.repository.CustomerRepository;
+import com.cg.set.CustomerReq;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -28,14 +29,16 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	BankRepository bankRepo;
 
-	public Customer createCustomer(@RequestBody Customer customer) {
-		Optional<Bank> ob = bankRepo.findById(customer.getBank().getId());
-		//Bank obj = ob.get();
+	public Customer createCustomer( CustomerReq custReq) {
+		Optional<Bank> ob = bankRepo.findById(custReq.getBankId());
+		
 		//System.out.println(obj);
 		if (ob.isPresent()) {
-			final Customer cust = custRepo.save(customer);
-			return cust;
-			
+			final Customer cust = custReq.getCustomer();
+			Bank obj = ob.get();
+			cust.setBank(obj);
+			return custRepo.save(cust);
+			 
 		} else {
 			throw new BankException("Customer or bank details is invalid");
 		}

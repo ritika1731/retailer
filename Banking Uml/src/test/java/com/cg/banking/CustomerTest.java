@@ -22,6 +22,7 @@ import com.cg.exception.BankException;
 import com.cg.repository.BankRepository;
 import com.cg.repository.CustomerRepository;
 import com.cg.services.CustomerServiceImpl;
+import com.cg.set.CustomerReq;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -43,24 +44,42 @@ public class CustomerTest {
 		Optional<Bank> ob = Optional.of(bank);
 		System.out.println(ob.isPresent());
 		final Customer customer = new Customer("ritika", 1231, bank);
+		final CustomerReq cust = new CustomerReq(1, customer);
 		when(bankRepository.findById(Mockito.any(Integer.class))).thenReturn(ob);
 		when(custRepo.save(customer)).thenReturn(customer);
 		// System.out.println(bank);
 		// when(custSer.createCustomer(customer)).thenThrow(new BankException("details
 		// invalid"));
-		assertThat(custSer.createCustomer(customer), is(notNullValue()));
+		assertThat(custSer.createCustomer(cust), is(notNullValue()));
 	}
 
 	@Test(expected = BankException.class)
-	public void createCustomers() {
+	public void checkCustomer() {
 		final Bank bank = new Bank(new BigDecimal(1000));
 
 		final Optional<Bank> ob = Optional.empty();
 		final Customer customer = new Customer("ritika", 1231, bank);
+		final CustomerReq cust = new CustomerReq(1, customer);
+
 		when(bankRepository.findById(Mockito.any(Integer.class))).thenReturn(ob);
 
-		when(custSer.createCustomer(customer)).thenThrow(new BankException("details invalid"));
+		custSer.createCustomer(cust);
 		// assertThat(custSer.createCustomer(customer), is(notNullValue()));
+	}
+
+	@Test
+	public void viewCustomer() {
+		final Bank bank = new Bank(new BigDecimal(0));
+		bank.setId(1);
+		Optional<Bank> bnk = Optional.of(bank);
+		final Customer customer = new Customer("ritika", 1231, bank);
+		customer.setCustomerId(2);
+		Optional<Customer> cust = Optional.of(customer);
+
+		when(custRepo.findById(1)).thenReturn(cust);
+
+		assertThat(custSer.getCustomerDetailsById(customer), is(notNullValue()));
+
 	}
 
 }

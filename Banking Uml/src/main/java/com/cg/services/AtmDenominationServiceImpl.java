@@ -2,6 +2,7 @@ package com.cg.services;
 
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import com.cg.repository.AtmDenominationRepository;
 
 @Service
 public class AtmDenominationServiceImpl implements AtmDenominationService {
+	private final static Logger LOGGER = Logger.getLogger(AtmDenominationServiceImpl.class.getName());
 
 	@Autowired
 	AtmDenominationRepository adRepo;

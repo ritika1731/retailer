@@ -5,18 +5,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.lang.NonNull;
 
 @Entity
 public class BankDenomination {
-
-	
-
+	@Id
+	private Integer demoninationId;
+	private Integer denomination;
 
 	@OneToOne(targetEntity = Bank.class)
 	private Bank bank;
+	@NotNull
 	private Integer noOfDenomination;
-	@Id
-	private Integer denomination;
 
 	/**
 	 * @return the bank
@@ -24,36 +26,45 @@ public class BankDenomination {
 	public Bank getBank() {
 		return bank;
 	}
+
 	/**
-	 * @param bank the bank to set
+	 * @param bank
+	 *            the bank to set
 	 */
 	public void setBank(Bank bank) {
 		this.bank = bank;
 	}
+
 	/**
 	 * @return the noOfDenomination
 	 */
 	public Integer getNoOfDenomination() {
 		return noOfDenomination;
 	}
+
 	/**
-	 * @param noOfDenomination the noOfDenomination to set
+	 * @param noOfDenomination
+	 *            the noOfDenomination to set
 	 */
 	public void setNoOfDenomination(Integer noOfDenomination) {
 		this.noOfDenomination = noOfDenomination;
 	}
+
 	/**
 	 * @return the denomination
 	 */
 	public Integer getDenomination() {
 		return denomination;
 	}
+
 	/**
-	 * @param randomElement the denomination to set
+	 * @param randomElement
+	 *            the denomination to set
 	 */
 	public void setDenomination(Integer randomElement) {
 		this.denomination = randomElement;
 	}
+
 	/**
 	 * @param bank
 	 * @param noOfDenomination
@@ -72,15 +83,16 @@ public class BankDenomination {
 	public BankDenomination() {
 		super();
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "BankDenomination [ bank=" + bank + ", noOfDenomination="
-				+ noOfDenomination + ", denomination=" + denomination + "]";
+		return "BankDenomination [ bank=" + bank + ", noOfDenomination=" + noOfDenomination + ", denomination="
+				+ denomination + "]";
 	}
-
-
 
 }

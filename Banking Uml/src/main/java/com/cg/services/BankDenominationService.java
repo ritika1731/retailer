@@ -11,5 +11,5 @@ public interface BankDenominationService {
 
 	public BankDenomination addDemomination(Bank bank,BigDecimal amount);
 	
-	public void createDenomination(Integer bankID);
+	
 }

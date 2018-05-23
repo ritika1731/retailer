@@ -80,6 +80,7 @@ public class AccountServiceImpl implements AccountService {
 
 		Optional<Bank> bankOpt = bankRepo.findById(account.getCustomer().getBank().getId());
 		Bank bank = bankOpt.get();
+		
 		/*
 		 * if (accOp == null) { throw new BankException("Account not found "); }
 		 */
@@ -93,7 +94,9 @@ public class AccountServiceImpl implements AccountService {
 			bank.setAmount(bankAmount);
 			bankRepo.save(bank);
 			transactionService.createTransaction(account, "Credit");
+			System.out.println("in");
 			bankdenoSer.addDemomination(bank, amount);
+			System.out.println("still in");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			throw new BankException("deposit failed");
@@ -119,6 +122,8 @@ public class AccountServiceImpl implements AccountService {
 			bank.setAmount(bankAmount);
 			bankRepo.save(bank);
 			transactionService.createTransaction(account, "debit");
+			bankdenoSer.addDemomination(bank, amount);
+
 		} else if (select.equals("atm")) {
 			Optional<ATM> atmOp = atmRepo.findById(atmId);
 			ATM atm = atmOp.get();

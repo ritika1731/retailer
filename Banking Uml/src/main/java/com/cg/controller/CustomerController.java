@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,6 +61,14 @@ public class CustomerController {
 			throw new BankException("id doesn't exists");
 		}
 
+	}
+	
+	@GetMapping(path = "/update/{custId}/{pin}")
+	public ResponseEntity<Customer> updateCustomer(@PathVariable Integer custId,@PathVariable Integer pin) {
+
+		Customer customer = custService.updateCustomer(custId,pin);
+
+		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
 	}
 
 }

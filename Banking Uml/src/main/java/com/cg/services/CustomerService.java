@@ -11,4 +11,6 @@ public interface CustomerService {
 	public Object getCustomerDetailsById(Customer customer);
 
 	public List<Customer> getCustomerDetails();
+
+	public Customer updateCustomer(Integer custId,Integer pin);
 }

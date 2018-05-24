@@ -59,4 +59,22 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<Customer> getCustomerDetails() {
 		return custRepo.findAll();
 	}
+	
+	@Override
+	 public  Customer updateCustomer(Integer custId,Integer pin)
+ {
+		
+		Optional<Customer> customer = custRepo.findById(custId);
+		if (customer.isPresent()) {
+			Customer cust = customer.get();
+			cust.setPin(pin);
+			return custRepo.save(cust);
+		}
+		else {
+			throw new BankException("Id not found");
+
+		}
+	}
+
+	
 }

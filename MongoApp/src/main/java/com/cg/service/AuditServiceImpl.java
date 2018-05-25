@@ -26,7 +26,7 @@ public class AuditServiceImpl implements AuditService {
 	public AuditLog removeAudit(String eventId) {
 		AuditLog audit = new AuditLog(eventId);
 
-		auditRepo.deleteById(eventId);
+		auditRepo.delete(eventId);
 		return audit;
 
 	}
@@ -35,7 +35,7 @@ public class AuditServiceImpl implements AuditService {
 	public Object findById(String eventId) {
 		// TODO Auto-generated method stub
 
-		Optional<AuditLog> auditlog = auditRepo.findById(eventId);
+		Optional<AuditLog> auditlog = auditRepo.findByEventId(eventId);
 		// System.out.println("***********"+auditlog);
 		if (auditlog.isPresent()) {
 			AuditLog audits = auditlog.get();
@@ -48,7 +48,7 @@ public class AuditServiceImpl implements AuditService {
 	@Override
 	public AuditLog updateAudit(String eventId, String eventName) {
 
-		Optional<AuditLog> auditlog = auditRepo.findById(eventId);
+		Optional<AuditLog> auditlog = auditRepo.findByEventId(eventId);
 		if (auditlog.isPresent()) {
 			AuditLog audit = auditlog.get();
 			audit.setEventName(eventName);

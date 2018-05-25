@@ -49,7 +49,7 @@ public class ATMServiceImpl implements ATMService {
 
 	@Override
 	public ATM addMoneyFromBank(BigDecimal amount, Integer atmId) {
-		Optional<ATM> atmOp = atmRepo.findById(atmId);
+		Optional<ATM> atmOp = atmRepo.findByAtmId(atmId);
 		ATM atm = atmOp.get();
 		Optional<Bank> bankOpt = bankRepo.findById(atm.getBank().getId());
 		Bank bank = bankOpt.get();

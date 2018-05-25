@@ -58,7 +58,7 @@ public class AccountTest {
 
 		when(bankRepo.findById(Mockito.any(Integer.class))).thenReturn(bnk);
 
-		when(custRepo.findById(Mockito.any(Integer.class))).thenReturn(cust);
+		when(custRepo.findBycustomerId(Mockito.any(Integer.class))).thenReturn(cust);
 
 		when(accRepo.save(account)).thenReturn(account);
 		assertThat(accSer.createAccount(accReq), is(notNullValue()));
@@ -82,7 +82,7 @@ public class AccountTest {
 		AccountRequest accReq = new AccountRequest(1, 4, account);
 
 		when(bankRepo.findById(Mockito.any(Integer.class))).thenReturn(banks);
-		when(custRepo.findById(Mockito.any(Integer.class))).thenReturn(customers);
+		when(custRepo.findBycustomerId(Mockito.any(Integer.class))).thenReturn(customers);
 
 		 when(accRepo.save(account)).thenReturn(account);
 		accSer.createAccount(accReq);
@@ -100,7 +100,7 @@ public class AccountTest {
 		final Account account=new Account(customer,new BigDecimal(100),bank);
 		account.setAccountId(2);
 		final Optional<Account> acc=Optional.of(account);
-		when(accRepo.findById(2)).thenReturn(acc);
+		when(accRepo.findByAccountId(2)).thenReturn(acc);
 		
 		/*final Bank bank=new Bank(new BigDecimal(100));
 		bank.setId(1);*/
@@ -127,7 +127,7 @@ public class AccountTest {
 		final Account account=new Account(customer,new BigDecimal(100),bank);
 		account.setAccountId(3);
 		final Optional<Account> acc=Optional.of(account);
-		when(accRepo.findById(3)).thenReturn(acc);
+		when(accRepo.findByAccountId(3)).thenReturn(acc);
 
 		assertThat(accSer.getAccountDetailsById(account), is(notNullValue()));
 

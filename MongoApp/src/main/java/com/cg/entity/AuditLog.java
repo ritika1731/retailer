@@ -1,6 +1,6 @@
 package com.cg.entity;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
@@ -18,7 +18,7 @@ public class AuditLog {
 	private String eventId;
 	private String eventName;
 	private String eventType;
-	private Date eventDate;
+	private Timestamp eventDate;
 	private String userId;
 	private Object oldValue;
 	private Object newValue;
@@ -72,7 +72,7 @@ public class AuditLog {
 	/**
 	 * @return the eventDate
 	 */
-	public Date getEventDate() {
+	public Timestamp getEventDate() {
 		return eventDate;
 	}
 
@@ -80,8 +80,8 @@ public class AuditLog {
 	 * @param eventDate
 	 *            the eventDate to set
 	 */
-	public void setEventDate(Date eventDate) {
-		this.eventDate = new Date();
+	public void setEventDate(Timestamp eventDate) {
+		this.eventDate =new Timestamp(System.currentTimeMillis());
 	}
 
 	/**

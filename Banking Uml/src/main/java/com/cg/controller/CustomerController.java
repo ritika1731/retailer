@@ -64,7 +64,7 @@ public class CustomerController {
 	}
 	
 	@GetMapping(path = "/update/{custId}/{pin}")
-	public ResponseEntity<Customer> updateCustomer(@PathVariable Integer custId,@PathVariable Integer pin) {
+	public ResponseEntity<Customer> updateCustomer(@PathVariable Integer custId,@PathVariable Integer pin) throws CloneNotSupportedException {
 
 		Customer customer = custService.updateCustomer(custId,pin);
 

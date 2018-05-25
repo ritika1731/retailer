@@ -44,7 +44,7 @@ public class MongoAppApplicationTests {
 		audit.setEventId("1");
 		Optional<AuditLog> auditlog = Optional.of(audit);
 
-		when(auditRepo.findById("1")).thenReturn(auditlog);
+		when(auditRepo.findByEventId("1")).thenReturn(auditlog);
 
 		assertThat(auditSer.findById("1"), is(notNullValue()));
 	}
@@ -55,7 +55,7 @@ public class MongoAppApplicationTests {
 		audit.setEventId("1");
 		Optional<AuditLog> auditlog = Optional.empty();
 
-		when(auditRepo.findById("1")).thenReturn(auditlog);
+		when(auditRepo.findByEventId("1")).thenReturn(auditlog);
 
 		auditSer.findById("1");
 	}
@@ -63,6 +63,8 @@ public class MongoAppApplicationTests {
 	@Test
 	public void viewAllAudit() {
 
+		AuditLog audit = new AuditLog("action", "abc", "12", new Object(), new Object());
+		audit.setEventId("1");
 		assertThat(auditSer.getDetails(), is(notNullValue()));
 	}
 
@@ -73,7 +75,7 @@ public class MongoAppApplicationTests {
 		audit.setEventId("1");
 		// System.out.println(audit);
 		Optional<AuditLog> auditlog = Optional.of(audit);
-		when(auditRepo.findById("1")).thenReturn(auditlog);
+		when(auditRepo.findByEventId("1")).thenReturn(auditlog);
 
 		assertThat(auditSer.removeAudit("1"), is(notNullValue()));
 	}
@@ -87,7 +89,7 @@ public class MongoAppApplicationTests {
 		System.out.println(audit);
 		Optional<AuditLog> auditlog = Optional.of(audit);
 		System.out.println(auditlog);
-		when(auditRepo.findById("1")).thenReturn(auditlog);
+		when(auditRepo.findByEventId("1")).thenReturn(auditlog);
 		System.out.println(">>>>>>>>>" + auditSer.updateAudit("1", "qwe"));
  
 		assertThat(auditSer.updateAudit("1", "qwe"), is(notNullValue()));

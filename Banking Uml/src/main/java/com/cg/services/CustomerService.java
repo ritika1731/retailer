@@ -12,5 +12,5 @@ public interface CustomerService {
 
 	public List<Customer> getCustomerDetails();
 
-	public Customer updateCustomer(Integer custId,Integer pin);
+	public Customer updateCustomer(Integer custId,Integer pin)throws CloneNotSupportedException;
 }

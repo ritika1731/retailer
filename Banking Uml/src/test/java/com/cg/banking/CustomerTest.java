@@ -76,7 +76,7 @@ public class CustomerTest {
 		customer.setCustomerId(2);
 		Optional<Customer> cust = Optional.of(customer);
 
-		when(custRepo.findById(1)).thenReturn(cust);
+		when(custRepo.findBycustomerId(1)).thenReturn(cust);
 
 		assertThat(custSer.getCustomerDetailsById(customer), is(notNullValue()));
 

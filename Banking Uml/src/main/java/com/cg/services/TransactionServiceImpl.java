@@ -57,10 +57,10 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	@Transactional
 	public Transaction createTransaction(Account account, String transacType) {
-		final Optional<Customer> custOpt = custRepo.findById(account.getCustomer().getCustomerId());
+		final Optional<Customer> custOpt = custRepo.findBycustomerId(account.getCustomer().getCustomerId());
 		final Customer customer = custOpt.get();
 
-		final Optional<Account> accOpt = accRepo.findById(account.getAccountId());
+		final Optional<Account> accOpt = accRepo.findByAccountId(account.getAccountId());
 		final Account account1 = accOpt.get();
 		Transaction transaction =new Transaction();
 		transaction.setAccount(account1);

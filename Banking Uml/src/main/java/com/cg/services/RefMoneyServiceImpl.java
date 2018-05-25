@@ -69,7 +69,7 @@ public class RefMoneyServiceImpl implements RefMoneyService {
 	
 	@Override
 	public void createAtmDenomination(Integer atmId) {
-		Optional<ATM> atmOpt = atmRepo.findById(atmId);
+		Optional<ATM> atmOpt = atmRepo.findByAtmId(atmId);
 		ATM atm = atmOpt.get();
 		AtmDenomination atmDm = new AtmDenomination(atm, 0, 100);
 		AtmDenomination atmDm1 = new AtmDenomination(atm, 0, 200);

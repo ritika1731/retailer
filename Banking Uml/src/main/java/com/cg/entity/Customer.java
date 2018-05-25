@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Customer extends BaseEntity {
+public class Customer extends BaseEntity implements Cloneable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -115,4 +115,8 @@ public class Customer extends BaseEntity {
 		return bank;
 	}
 
+	@Override
+	public Customer clone() throws CloneNotSupportedException {
+		return (Customer) super.clone();
+	}
 }

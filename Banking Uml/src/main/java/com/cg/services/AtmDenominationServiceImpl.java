@@ -1,6 +1,6 @@
 package com.cg.services;
 
-import java.util.Optional;
+import java.math.BigDecimal;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +22,11 @@ public class AtmDenominationServiceImpl implements AtmDenominationService {
 	ATMRepository atmRepo;
 
 	@Override
-	public void createDenomination(Integer atmId) {
+	public AtmDenomination addDemomination(ATM atm, BigDecimal amount) {
 		// TODO Auto-generated method stub
-		Optional<ATM> atmOpt = atmRepo.findById(atmId);
-		ATM atm = atmOpt.get();
-		AtmDenomination atmDm = new AtmDenomination(atm, 0, 100);
-		AtmDenomination atmDm1 = new AtmDenomination(atm, 0, 200);
-		AtmDenomination atmDm2 = new AtmDenomination(atm, 0, 500);
-		AtmDenomination atmDm3 = new AtmDenomination(atm, 0, 2000);
-		adRepo.save(atmDm);
-		adRepo.save(atmDm1);
-		adRepo.save(atmDm2);
-		adRepo.save(atmDm3);
-
+		return null;
 	}
+
+	
 
 }

@@ -44,7 +44,7 @@ public class AccountServiceImpl implements AccountService {
 		Optional<Bank> bankOpt = bankRepo.findById(acctReq.getBankId());
 		// Bank bank = bankOpt.get();
 
-		Optional<Customer> custOpt = custRepo.findById(acctReq.getCustomerId());
+		Optional<Customer> custOpt = custRepo.findBycustomerId(acctReq.getCustomerId());
 
 		if (bankOpt.isPresent() && custOpt.isPresent()) {
 			Bank bank = bankOpt.get();
@@ -65,7 +65,7 @@ public class AccountServiceImpl implements AccountService {
 	public Object getAccountDetailsById(@RequestBody Account account) {
 
 		try {
-			Object acc = accRepo.findById(account.getAccountId());
+			Object acc = accRepo.findByAccountId(account.getAccountId());
 			return acc;
 		} catch (BankException e) {
 			// TODO Auto-generated catch block
@@ -75,7 +75,7 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public Account depositMoney(Integer accountId, BigDecimal amount) {
-		Optional<Account> accOp = accRepo.findById(accountId);
+		Optional<Account> accOp = accRepo.findByAccountId(accountId);
 		Account account = accOp.get();
 
 		Optional<Bank> bankOpt = bankRepo.findById(account.getCustomer().getBank().getId());
@@ -107,7 +107,7 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	@Transactional
 	public Account withdraw(Integer accountId, BigDecimal amount, String select, Integer atmId) {
-		Optional<Account> accOp = accRepo.findById(accountId);
+		Optional<Account> accOp = accRepo.findByAccountId(accountId);
 		Account account = accOp.get();
 
 		Optional<Bank> bankOpt = bankRepo.findById(account.getCustomer().getBank().getId());
@@ -125,7 +125,7 @@ public class AccountServiceImpl implements AccountService {
 			bankdenoSer.addDemomination(bank, amount);
 
 		} else if (select.equals("atm")) {
-			Optional<ATM> atmOp = atmRepo.findById(atmId);
+			Optional<ATM> atmOp = atmRepo.findByAtmId(atmId);
 			ATM atm = atmOp.get();
 
 			BigDecimal amounts = atm.getAmount().subtract(amount);

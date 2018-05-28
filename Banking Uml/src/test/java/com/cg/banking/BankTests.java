@@ -59,4 +59,25 @@ public class BankTests {
 
 	}
 
+	@Test(expected = BankException.class)
+	public void viewBanks() {
+		final Bank bank = new Bank(new BigDecimal(0));
+		bank.setId(1);
+		Optional<Bank> bnk = Optional.empty();
+		when(repoMock.findById(1)).thenReturn(bnk);
+
+		bankSer.getBankDetailsById(bank);
+
+	}
+	
+	@Test
+	public void viewAll() {
+		final Bank bank = new Bank(new BigDecimal(0));
+		bank.setId(1);
+		
+		assertThat(bankSer.getBankDetails(), is(notNullValue()));
+
+	}
+	
+
 }

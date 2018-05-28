@@ -11,14 +11,14 @@ public class Bank {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer Id;
+	private Integer id;
 	private BigDecimal amount;
 
 	/**
 	 * @return the id
 	 */
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 
 	/**
@@ -26,7 +26,7 @@ public class Bank {
 	 *            the id to set
 	 */
 	public void setId(Integer id) {
-		Id = id;
+		this.id = id;
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class Bank {
 	 */
 	@Override
 	public String toString() {
-		return "Bank [Id=" + Id + ", amount=" + amount + "]";
+		return "Bank [Id=" + id + ", amount=" + amount + "]";
 	}
 
 }

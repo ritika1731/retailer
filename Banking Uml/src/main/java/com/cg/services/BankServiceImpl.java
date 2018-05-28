@@ -1,6 +1,7 @@
 package com.cg.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,13 @@ import com.cg.repository.BankRepository;
 @Service
 public class BankServiceImpl implements BankService {
 	private final static Logger LOGGER = Logger.getLogger(BankService.class.getName());
-	@Autowired
-	Environment env;
+/*	@Autowired
+	Environment env;*/
 	@Autowired
 	BankRepository bankRepo;
 
 	public Bank createBank(@RequestBody Bank bank) {
 		if ((bank.getAmount().intValue()) < 0) {
-			//LOGGER.error(env.getProperty("NEGATIVE_9999"));
-//			System.out.println(env.getProperty("NEGATIVE_9999"));
 			throw new BankException("Id not found");
 
 		} else {
@@ -33,14 +32,14 @@ public class BankServiceImpl implements BankService {
 
 	public Object getBankDetailsById(@RequestBody Bank bank) {
 
-		try {
-			Object banking = bankRepo.findById(bank.getId());
-			return banking;
-		} catch (BankException e) {
-			// TODO Auto-generated catch block
+		Optional<Bank> banking = bankRepo.findById(bank.getId());
+		if (banking.isPresent()) {
+			Bank banks = banking.get();
+			return banks;
+		} else {
 			throw new BankException("Id not found");
-		}
 
+		}
 	}
 
 	public List<Bank> getBankDetails() {

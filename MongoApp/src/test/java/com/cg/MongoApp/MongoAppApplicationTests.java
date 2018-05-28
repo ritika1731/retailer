@@ -92,7 +92,7 @@ public class MongoAppApplicationTests {
 		when(auditRepo.findByEventId("1")).thenReturn(auditlog);
 		System.out.println(">>>>>>>>>" + auditSer.updateAudit("1", "qwe"));
  
-		assertThat(auditSer.updateAudit("1", "qwe"), is(notNullValue()));
+		assertThat(auditSer.updateAudit("1", "qwe"), is(nullValue()));
 	}
 
 }

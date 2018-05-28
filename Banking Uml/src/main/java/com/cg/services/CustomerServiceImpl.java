@@ -53,13 +53,17 @@ public class CustomerServiceImpl implements CustomerService, Cloneable {
 
 	public Object getCustomerDetailsById(@RequestBody Customer customer) {
 
-		try {
-			Object cust = custRepo.findBycustomerId(customer.getCustomerId());
-			return cust;
-		} catch (BankException e) {
-			// TODO Auto-generated catch block
-			throw new BankException("Id not found");
-		}
+		
+			Optional<Customer> cust = custRepo.findBycustomerId(customer.getCustomerId());
+			if(cust.isPresent()) {
+			
+			Customer customers=cust.get();
+			return customers;
+			}
+			else
+			{
+				throw new BankException("Id not found");
+			}
 
 	}
 
@@ -80,7 +84,7 @@ public class CustomerServiceImpl implements CustomerService, Cloneable {
 
 			AuditLog audit = new AuditLog(EventName.CUSTOMER.toString(), EventType.UPDATED.toString(), cust.getUserId(),
 					oldValue, cust);
-			auditService.generateAudit(audit);
+			auditService.createAudit(audit);
 			return cust;
 		} else {
 			throw new BankException("Id not found");

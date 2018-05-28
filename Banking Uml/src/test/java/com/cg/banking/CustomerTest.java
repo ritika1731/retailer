@@ -76,10 +76,53 @@ public class CustomerTest {
 		customer.setCustomerId(2);
 		Optional<Customer> cust = Optional.of(customer);
 
-		when(custRepo.findBycustomerId(1)).thenReturn(cust);
+		when(custRepo.findBycustomerId(2)).thenReturn(cust);
 
 		assertThat(custSer.getCustomerDetailsById(customer), is(notNullValue()));
 
 	}
+	
+	@Test(expected = BankException.class)
+	public void viewCustomers() {
+		final Bank bank = new Bank(new BigDecimal(0));
+		bank.setId(1);
+		final Customer customer = new Customer("ritika", 1231, bank);
+		customer.setCustomerId(2);
+		Optional<Customer> cust = Optional.of(customer);
+		//Optional<Customer> custmer = Optional.empty();
+		
+		when(custRepo.findBycustomerId(5)).thenReturn(cust);
+
+		custSer.getCustomerDetailsById(customer);
+
+	}
+	
+	@Test
+	public void viewAll() {
+		final Bank bank = new Bank(new BigDecimal(0));
+		bank.setId(1);
+		Optional<Bank> bnk = Optional.of(bank);
+		final Customer customer = new Customer("ritika", 1231, bank);
+		customer.setCustomerId(2);
+		
+		assertThat(custSer.getCustomerDetails(), is(notNullValue()));
+
+	}
+	
+	
+	
+	@Test
+	public void updateCust() throws CloneNotSupportedException {
+		final Bank bank = new Bank(new BigDecimal(0));
+		bank.setId(1);
+		Optional<Bank> bnk = Optional.of(bank);
+		final Customer customer = new Customer("ritika", 1231, bank);
+		customer.setCustomerId(2);
+		
+		assertThat(custSer.updateCustomer(2, 3435), is(notNullValue()));
+
+	}
+	
+
 
 }

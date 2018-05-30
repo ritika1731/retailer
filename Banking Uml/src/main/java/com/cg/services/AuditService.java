@@ -7,10 +7,10 @@ import com.cg.entity.AuditLog;
 
 
 
-@FeignClient("zuul-service")
+@FeignClient("mongo-service")
 public interface AuditService{
 	
-	@PostMapping(path="/audit/audit/create")
+	@PostMapping(path="/audit/create")
 	ResponseEntity<AuditLog> createAudit( AuditLog audit);
 
 
